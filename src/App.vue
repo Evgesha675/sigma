@@ -3,16 +3,20 @@ import TheHeader from './components/TheHeader.vue'
 import TheHero from './components/TheHero.vue'
 import AboutUs from './components/AboutUs.vue'
 import Courses from './components/Courses.vue'
+import Teachers from './components/Teachers.vue'
+import Contacts from './components/Contacts.vue'
 </script>
 
 <template>
-  <div class="min-h-screen bg-white font-gothic overflow-hidden">
+  <div class="min-h-screen bg-white font-gothic">
     <TheHeader />
     
-    <main class="mt-20">
+    <main id="home" class="mt-20 4k:mt-28">
       <TheHero />
       <AboutUs />
       <Courses />
+      <Teachers />
+      <Contacts />
     </main>
   </div>
 </template>
