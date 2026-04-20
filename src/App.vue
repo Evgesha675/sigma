@@ -5,6 +5,7 @@ import AboutUs from './components/AboutUs.vue'
 import Courses from './components/Courses.vue'
 import Teachers from './components/Teachers.vue'
 import Contacts from './components/Contacts.vue'
+import TheFooter from './components/TheFooter.vue'
 </script>
 
 <template>
@@ -17,6 +18,7 @@ import Contacts from './components/Contacts.vue'
       <Courses />
       <Teachers />
       <Contacts />
+      <TheFooter />
     </main>
   </div>
 </template>
