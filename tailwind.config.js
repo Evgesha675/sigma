@@ -10,12 +10,10 @@ export default {
         'xl': '1280px',
         '2xl': '1536px',
         'qhd': '2048px',     // 2K мониторы
-        '4k': '3840px',      // 4K мониторы
       },
       maxWidth: {
         'container': '1320px',
         'container-qhd': '1800px',
-        'container-4k': '2800px', 
       },
       colors: {
         'sigma-blue': '#273972',   // Из брошуры

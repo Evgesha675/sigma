@@ -13,25 +13,25 @@ const navLinks = [
 
 <template>
   <header class="fixed top-0 left-0 w-full bg-white shadow-md z-[100] font-gothic overflow-x-hidden">
-    <div class="max-w-7xl 4k:max-w-[1920px] 5k:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20 4k:h-28">
+    <div class="max-w-7xl 5k:max-w-[2400px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
         
         <div class="flex-shrink-0 flex items-center">
-          <img src="../assets/logo/logo.svg" alt="СИГМА" class="h-6 md:h-8 4k:h-12 w-auto transition-all" />
+          <img src="../assets/logo/logo.svg" alt="СИГМА" class="h-6 md:h-8 w-auto transition-all" />
         </div>
 
-        <nav class="hidden md:flex space-x-8 4k:space-x-12 uppercase text-sm 4k:text-lg font-bold text-sigma-blue">
+        <nav class="hidden md:flex space-x-8 uppercase text-sm font-bold text-sigma-blue">
           <a v-for="link in navLinks" :key="link.name" :href="link.href" 
              class="hover:text-sigma-pink transition-colors uppercase">
             {{ link.name }}
           </a>
         </nav>
 
-        <div class="hidden md:flex items-center gap-6 4k:gap-8">
-          <a href="tel:+79247174852" class="text-sigma-blue font-bold whitespace-nowrap 4k:text-lg">
+        <div class="hidden md:flex items-center gap-6">
+          <a href="tel:+79247174852" class="text-sigma-blue font-bold whitespace-nowrap">
             8 (924) 717-48-52
           </a>
-          <button class="bg-sigma-pink text-white px-6 4k:px-8 py-2.5 4k:py-4 font-bold uppercase tracking-widest transition-all duration-300 hover:opacity-90 active:scale-95 shadow-md rounded-none 4k:text-lg">
+          <button class="bg-sigma-pink text-white px-6 py-2.5 font-bold uppercase tracking-widest transition-all duration-300 hover:opacity-90 active:scale-95 shadow-md rounded-none">
             ЗАПИСАТЬСЯ
           </button>
         </div>

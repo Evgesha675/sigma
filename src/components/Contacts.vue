@@ -44,30 +44,30 @@ const activeIndex = ref(0)
         Контакты
       </h2>
 
-      <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
         
-        <div class="space-y-10">
-          <div class="space-y-6">
+        <div class="space-y-6 md:space-y-10 order-2 lg:order-1">
+          <div class="space-y-4 md:space-y-6">
             <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block">Наши филиалы</span>
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-2 md:gap-4">
               <button 
                 v-for="(loc, index) in locations" 
                 :key="index"
                 @click="activeIndex = index"
-                class="text-left p-4 border-l-2 transition-all duration-300 outline-none"
+                class="text-left p-2 md:p-4 border-l-2 transition-all duration-300 outline-none"
                 :class="activeIndex === index 
                   ? 'border-sigma-pink bg-white/10' 
                   : 'border-white/10 hover:border-white/30 bg-transparent'"
               >
-                <span class="block text-[10px] uppercase opacity-50 text-white mb-1">{{ loc.city }}</span>
-                <p class="text-lg md:text-xl text-white font-bold leading-tight">{{ loc.address }}</p>
+                <span class="block text-[9px] md:text-[10px] uppercase opacity-50 text-white mb-0.5 md:mb-1">{{ loc.city }}</span>
+                <p class="text-base md:text-lg lg:text-xl text-white font-bold leading-tight">{{ loc.address }}</p>
               </button>
             </div>
           </div>
 
           <div class="contact-block">
             <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-3">Запись по телефону</span>
-            <a :href="`tel:${rawPhone}`" class="text-3xl md:text-4xl font-black text-white hover:text-sigma-pink transition-colors">
+            <a :href="`tel:${rawPhone}`" class="text-2xl md:text-3xl lg:text-4xl font-black text-white hover:text-sigma-pink transition-colors">
               {{ phoneNumber }}
             </a>
           </div>
@@ -75,19 +75,14 @@ const activeIndex = ref(0)
           <div class="contact-block">
             <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-4">Мы в сети</span>
             <div class="flex gap-6">
-                       <!--   !-- VK -->
               <a href="https://vk.com/your_profile" target="_blank"
                 class="opacity-80 hover:opacity-100 transition-opacity">
                 <img height="32" width="32" src="https://cdn.simpleicons.org/vk/white" />
               </a>
-
-              <!-- Telegram -->
               <a href="https://t.me/your_username" target="_blank"
                 class="opacity-80 hover:opacity-100 transition-opacity">
                 <img height="32" width="32" src="https://cdn.simpleicons.org/telegram/white" />
               </a>
-
-              <!-- Instagram -->
               <a href="https://instagram.com/your_username" target="_blank"
                 class="opacity-80 hover:opacity-100 transition-opacity">
                 <img height="32" width="32" src="https://cdn.simpleicons.org/instagram/white" />
@@ -96,7 +91,7 @@ const activeIndex = ref(0)
           </div>
         </div>
 
-        <div class="map-container overflow-hidden rounded-sm relative shadow-2xl">
+        <div class="map-container overflow-hidden rounded-sm relative shadow-2xl order-1 lg:order-2">
           <transition name="fade" mode="out-in">
             <iframe 
               :key="activeIndex"
@@ -121,8 +116,7 @@ const activeIndex = ref(0)
 }
 
 .map-container {
-
-  @apply w-full h-[450px] lg:h-[600px] bg-white/5 border-2 border-white/10;
+  @apply w-full h-[300px] md:h-[400px] lg:h-[600px] bg-white/5 border-2 border-white/10;
 }
 
 /* Анимация перехода между картами */

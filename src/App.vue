@@ -12,7 +12,7 @@ import TheFooter from './components/TheFooter.vue'
   <div class="min-h-screen bg-white font-gothic">
     <TheHeader />
     
-    <main id="home" class="mt-20 4k:mt-28">
+    <main id="home" class="mt-20">
       <TheHero />
       <AboutUs />
       <Courses />

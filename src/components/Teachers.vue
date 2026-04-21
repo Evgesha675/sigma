@@ -36,32 +36,14 @@ const teachers = [
   }
 ]
 
-const isGrid = ref(false)
-const activeIndex = ref(0)
-
 const getTeacherPhoto = (name) => {
   return new URL(`../assets/teachers/${name}`, import.meta.url).href
-}
-
-const handleScroll = (event) => {
-  if (isGrid.value) return
-  const scrollLeft = event.target.scrollLeft
-  const width = event.target.offsetWidth
-  activeIndex.value = Math.round(scrollLeft / width)
 }
 </script>
 
 <template>
   <section id="teachers" class="bg-white py-24 md:py-32 px-4 font-gothic relative">
-    
-    <button 
-      @click="isGrid = !isGrid"
-      class="md:hidden fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full shadow-lg border-2 border-sigma-pink transition-all duration-300 flex items-center justify-center bg-white active:scale-90"
-    >
-      <div class="w-3 h-3 rounded-full transition-colors" :class="isGrid ? 'bg-sigma-pink' : 'bg-gray-300'"></div>
-    </button>
-
-    <div class="mx-auto w-full max-w-container qhd:max-w-container-qhd 4k:max-w-container-4k flex flex-col md:flex-row gap-8 md:gap-16 items-stretch">
+    <div class="mx-auto w-full max-w-container qhd:max-w-container-qhd flex flex-col md:flex-row gap-8 md:gap-16 items-stretch">
       
       <div class="hidden md:block w-20 shrink-0 pl-4 relative">
         <div class="absolute left-0 top-0 bottom-0 w-1 bg-sigma-pink"></div>
@@ -76,22 +58,12 @@ const handleScroll = (event) => {
 
       <div class="flex-1 flex flex-col">
         <div 
-          @scroll="handleScroll"
-          :class="[
-            'w-full transition-all duration-500 pt-20 md:pt-0 items-stretch',
-            !isGrid 
-              ? 'flex overflow-x-auto pb-10 snap-x snap-mandatory scrollbar-hide md:grid' 
-              : 'grid grid-cols-1 gap-y-24 pb-10 md:grid',
-            'md:grid md:grid-cols-2 lg:grid-cols-4 qhd:grid-cols-5 md:gap-x-6 md:gap-y-24 md:overflow-visible'
-          ]"
+          class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 qhd:grid-cols-5 gap-y-24 md:gap-x-6 md:gap-y-24 pb-10 items-stretch"
         >
           <div 
             v-for="(teacher, index) in teachers" 
             :key="teacher.id"
-            :class="[
-              'teacher-card relative flex flex-col items-center cursor-pointer transition-all duration-300 group',
-              !isGrid ? 'min-w-[85vw] snap-center mr-6 md:mr-0 md:min-w-0' : 'w-full'
-            ]"
+            class="teacher-card relative flex flex-col items-center cursor-pointer transition-all duration-300 group w-full"
           >
             <div class="relative w-full h-40 md:h-auto md:aspect-square -mb-12 md:-mb-20 z-20 flex justify-center items-center overflow-visible">
               <div class="w-64 h-64 md:w-48 lg:w-44 xl:w-52 2xl:w-56 qhd:w-64 aspect-square shrink-0 rounded-full border-4 border-white bg-white overflow-hidden shadow-xl transition-all duration-500 origin-bottom group-hover:scale-105">
@@ -124,15 +96,6 @@ const handleScroll = (event) => {
               </div>
             </div>
           </div>
-        </div>
-
-        <div v-if="!isGrid" class="flex md:hidden justify-center gap-2 mt-4">
-          <div 
-            v-for="(_, index) in teachers" 
-            :key="index"
-            class="h-1.5 rounded-full transition-all duration-300"
-            :class="activeIndex === index ? 'bg-sigma-pink w-6' : 'bg-gray-300 w-1.5'"
-          ></div>
         </div>
       </div>
     </div>
