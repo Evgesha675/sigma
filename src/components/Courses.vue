@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const courses = [
   { id: 1, name: 'Математика. Устранение пробелов', icon: 'icon_1.svg', color: '#F7A62A' },
@@ -13,6 +13,15 @@ const courses = [
   { id: 9, name: '3D моделирование Blender', icon: 'icon_9.svg', color: '#F7A62A' },
 ]
 
+const isExpanded = ref(false)
+
+// Логика отображения: на десктопе всегда всё, на мобилке — зависит от кнопки
+const visibleCourses = computed(() => {
+  // Проверяем ширину экрана (через window, если нужно динамически, 
+  // но проще управлять видимостью через классы Tailwind и показывать/скрывать кнопку)
+  return isExpanded.value ? courses : courses.slice(0, 3)
+})
+
 const getImageUrl = (name) => {
   return new URL(`../assets/icons/${name}`, import.meta.url).href
 }
@@ -20,8 +29,7 @@ const getImageUrl = (name) => {
 
 <template>
   <section id="courses" class="bg-white py-12 md:py-24 px-4 font-gothic w-full relative">
-
-    <div class="max-w-7xl 5k:max-w-[2400px] mx-auto flex flex-col md:flex-row gap-8 md:gap-16 items-stretch">
+    <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16 items-stretch">
       
       <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-blue pl-4" data-aos="fade-right">
         <h2 class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-blue uppercase tracking-tighter">
@@ -34,18 +42,18 @@ const getImageUrl = (name) => {
       </h2>
 
       <div class="flex-1 w-full">
-        <div 
-          class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 pb-10 md:pb-0"
-        >
+        <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          
           <div 
             v-for="(course, index) in courses" 
             :key="course.id"
             class="course-card border-l-[10px] p-6 md:p-8 flex flex-col items-start text-left cursor-pointer transition-all duration-500 group relative shadow-xl hover:shadow-2xl w-full"
+            :class="{ 'hidden md:flex': index >= 3 && !isExpanded }"
             :style="{ borderLeftColor: course.color, '--item-color': course.color }"
             data-aos="fade-up"
             :data-aos-delay="index * 50"
           >
-            <div class="w-full h-32 md:h-32 mb-6 flex items-center justify-start relative bg-transparent overflow-visible">
+            <div class="w-full h-32 mb-6 flex items-center justify-start relative overflow-visible">
               <img 
                 :src="getImageUrl(course.icon)" 
                 :alt="course.name" 
@@ -63,13 +71,13 @@ const getImageUrl = (name) => {
           </div>
         </div>
 
-        <div v-if="!isGrid" class="flex md:hidden justify-center gap-2 mt-4">
-          <div 
-            v-for="(_, index) in courses" 
-            :key="index"
-            class="h-2 rounded-full transition-all duration-300"
-            :class="activeIndex === index ? 'bg-sigma-blue w-6' : 'bg-gray-300 w-2'"
-          ></div>
+        <div class="mt-10 md:hidden flex justify-center">
+          <button 
+            @click="isExpanded = !isExpanded"
+            class="border-2 border-sigma-blue text-sigma-blue px-8 py-3 uppercase font-black tracking-widest text-sm hover:bg-sigma-blue hover:text-white transition-all active:scale-95"
+          >
+            {{ isExpanded ? 'Скрыть' : 'Показать больше' }}
+          </button>
         </div>
 
       </div>
@@ -87,25 +95,12 @@ const getImageUrl = (name) => {
 .course-card {
   min-height: 220px; 
   background-color: white;
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
-}
-
-@media (min-width: 2560px) {
-  .course-card {
-    min-height: 320px;
-    min-width: 380px;
-  }
 }
 
 .course-card:hover {
   background-color: var(--item-color) !important;
   border-left-color: var(--item-color) !important;
 }
-
-.scrollbar-hide::-webkit-scrollbar { display: none; }
-.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
 .course-card img {
   filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.08));

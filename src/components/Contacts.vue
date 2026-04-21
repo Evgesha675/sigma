@@ -31,67 +31,67 @@ const activeIndex = ref(0)
 </script>
 
 <template>
-  <section id="contacts" class="bg-sigma-blue py-24 md:py-32 px-4 font-gothic relative overflow-hidden">
-    <div class="mx-auto w-full max-w-container qhd:max-w-container-qhd flex flex-col md:flex-row gap-12 md:gap-20 items-stretch relative z-10">
+  <section id="contacts" class="bg-sigma-blue py-16 md:py-28 px-4 font-gothic relative overflow-hidden">
+    <div class="main-container flex flex-col md:flex-row gap-12 md:gap-20 items-stretch relative z-10">
       
-      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-pink pl-4">
+      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
         <h2 class="vertical-title text-5xl lg:text-6xl font-bold text-white uppercase tracking-tighter">
           Контакты
         </h2>
       </div>
 
-      <h2 class="md:hidden text-4xl font-bold text-white uppercase tracking-tighter mb-10 border-l-4 border-sigma-pink pl-4">
+      <h2 class="md:hidden text-4xl font-bold text-white uppercase tracking-tighter mb-10 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
         Контакты
       </h2>
 
       <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
         
-        <div class="space-y-6 md:space-y-10 order-2 lg:order-1">
+        <div class="space-y-6 md:space-y-10 order-2 lg:order-1" data-aos="fade-up">
           <div class="space-y-4 md:space-y-6">
-            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block">Наши филиалы</span>
+            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block opacity-60">Наши филиалы</span>
             <div class="flex flex-col gap-2 md:gap-4">
               <button 
                 v-for="(loc, index) in locations" 
                 :key="index"
                 @click="activeIndex = index"
-                class="text-left p-2 md:p-4 border-l-2 transition-all duration-300 outline-none"
+                class="text-left p-3 md:p-4 border-l-2 transition-all duration-300 outline-none group"
                 :class="activeIndex === index 
-                  ? 'border-sigma-pink bg-white/10' 
-                  : 'border-white/10 hover:border-white/30 bg-transparent'"
+                  ? 'border-sigma-pink bg-white/10 shadow-lg' 
+                  : 'border-white/10 hover:border-white/40 bg-transparent'"
               >
-                <span class="block text-[9px] md:text-[10px] uppercase opacity-50 text-white mb-0.5 md:mb-1">{{ loc.city }}</span>
-                <p class="text-base md:text-lg lg:text-xl text-white font-bold leading-tight">{{ loc.address }}</p>
+                <span class="block text-[9px] md:text-[10px] uppercase opacity-50 text-white mb-0.5 md:mb-1 group-hover:opacity-100 transition-opacity">{{ loc.city }}</span>
+                <p class="text-base md:text-lg lg:text-xl text-white font-bold leading-tight transition-colors">{{ loc.address }}</p>
               </button>
             </div>
           </div>
 
           <div class="contact-block">
-            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-3">Запись по телефону</span>
+            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-3 opacity-60">Запись по телефону</span>
             <a :href="`tel:${rawPhone}`" class="text-2xl md:text-3xl lg:text-4xl font-black text-white hover:text-sigma-pink transition-colors">
               {{ phoneNumber }}
             </a>
           </div>
 
           <div class="contact-block">
-            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-4">Мы в сети</span>
+            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-4 opacity-60">Мы в сети</span>
             <div class="flex gap-6">
-              <a href="https://vk.com/your_profile" target="_blank"
-                class="opacity-80 hover:opacity-100 transition-opacity">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/vk/white" />
+              <a href="https://vk.com/your_profile" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
+                <img height="32" width="32" src="https://cdn.simpleicons.org/vk/white" alt="VK" />
               </a>
-              <a href="https://t.me/your_username" target="_blank"
-                class="opacity-80 hover:opacity-100 transition-opacity">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/telegram/white" />
+              <a href="https://t.me/your_username" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
+                <img height="32" width="32" src="https://cdn.simpleicons.org/telegram/white" alt="Telegram" />
               </a>
-              <a href="https://instagram.com/your_username" target="_blank"
-                class="opacity-80 hover:opacity-100 transition-opacity">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/instagram/white" />
+              <a href="https://instagram.com/your_username" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
+                <img height="32" width="32" src="https://cdn.simpleicons.org/instagram/white" alt="Instagram" />
               </a>
             </div>
           </div>
         </div>
 
-        <div class="map-container overflow-hidden rounded-sm relative shadow-2xl order-1 lg:order-2">
+        <div 
+          class="map-container overflow-hidden rounded-none relative shadow-2xl order-1 lg:order-2"
+          data-aos="zoom-in"
+        >
           <transition name="fade" mode="out-in">
             <iframe 
               :key="activeIndex"
@@ -116,13 +116,13 @@ const activeIndex = ref(0)
 }
 
 .map-container {
-  @apply w-full h-[300px] md:h-[400px] lg:h-[600px] bg-white/5 border-2 border-white/10;
+  @apply w-full h-[350px] md:h-[450px] lg:h-[650px] bg-white/5 border border-white/10;
 }
 
 /* Анимация перехода между картами */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease-in-out;
 }
 
 .fade-enter-from,

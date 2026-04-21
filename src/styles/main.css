@@ -87,3 +87,8 @@ body {
     font-size: 22px;
   }
 }
+@layer components {
+  .main-container {
+    @apply mx-auto w-full max-w-container qhd:max-w-container-qhd px-4 sm:px-6 lg:px-8;
+  }
+}

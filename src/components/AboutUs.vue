@@ -1,6 +1,6 @@
 <template>
-  <section id="about" class="bg-white py-16 md:py-28 px-4 w-full">
-    <div class="max-w-7xl 5k:max-w-[2400px] mx-auto">
+  <section id="about" class="bg-white py-16 md:py-28 px-4 w-full font-gothic">
+    <div class="main-container">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         
         <div 
@@ -11,7 +11,7 @@
           <img 
             src="../assets/mascot/mascot_1.svg" 
             alt="Маскот Сигма" 
-            class="w-full max-w-[320px] md:max-w-[500px] h-auto" 
+            class="w-full max-w-[320px] md:max-w-[500px] h-auto drop-shadow-xl" 
           />
         </div>
 
@@ -27,7 +27,7 @@
             <p class="text-lg md:text-2xl leading-relaxed font-medium">
               Мы создали школу, где каждый ребенок сможет раскрыть свои таланты в области информационных технологий и точных наук. Наши программы обучения охватывают программирование, информатику, математику, робототехнику и многое другое.
             </p>
-            <p class="text-lg md:text-2xl leading-relaxed font-medium">
+            <p class="text-lg md:text-2xl leading-relaxed font-medium border-l-4 border-sigma-pink/30 pl-6">
               Мы верим в индивидуальный подход, креативное обучение и создание дружелюбной атмосферы. Наша миссия — воспитать новое поколение инноваторов и исследователей.
             </p>
           </div>
@@ -37,3 +37,7 @@
     </div>
   </section>
 </template>
+
+<script setup>
+// Скрипт не требуется
+</script>
