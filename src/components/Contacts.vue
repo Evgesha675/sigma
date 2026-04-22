@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { siteConfig } from '../config/data.js'
 
-const phoneNumber = '8 (924) 717-48-52'
-const rawPhone = '79247174852'
+const phoneNumber = siteConfig.phone
+const rawPhone = siteConfig.phoneLink.replace(/\D/g, '')
 
 const locations = [
   {
@@ -75,13 +76,13 @@ const activeIndex = ref(0)
           <div class="contact-block">
             <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-4 opacity-60">Мы в сети</span>
             <div class="flex gap-6">
-              <a href="https://vk.com/your_profile" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
+              <a :href="siteConfig.vk" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
                 <img height="32" width="32" src="https://cdn.simpleicons.org/vk/white" alt="VK" />
               </a>
-              <a href="https://t.me/your_username" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
+              <a :href="siteConfig.telegram" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
                 <img height="32" width="32" src="https://cdn.simpleicons.org/telegram/white" alt="Telegram" />
               </a>
-              <a href="https://instagram.com/your_username" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
+              <a :href="siteConfig.instagram" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
                 <img height="32" width="32" src="https://cdn.simpleicons.org/instagram/white" alt="Instagram" />
               </a>
             </div>

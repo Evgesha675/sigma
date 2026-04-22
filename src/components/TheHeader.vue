@@ -1,7 +1,13 @@
 <script setup>
 import { ref } from 'vue'
+import { siteConfig } from '../config/data.js'
 
 const isMenuOpen = ref(false)
+
+const openTelegram = () => {
+  window.open(siteConfig.telegram, '_blank')
+  isMenuOpen.value = false
+}
 
 const navLinks = [
   { name: 'О школе', href: '#about' },  
@@ -27,10 +33,10 @@ const navLinks = [
         </nav>
 
         <div class="hidden lg:flex items-center gap-6">
-          <a href="tel:+79247174852" class="text-sigma-blue font-bold whitespace-nowrap text-sm xl:text-base">
-            8 (924) 717-48-52
+          <a :href="`tel:${siteConfig.phoneLink}`" class="text-sigma-blue font-bold whitespace-nowrap text-sm xl:text-base">
+            {{ siteConfig.phone }}
           </a>
-          <button class="bg-sigma-pink text-white px-6 py-2.5 font-bold uppercase tracking-widest hover:bg-sigma-blue transition-all shrink-0 shadow-md">
+          <button @click="openTelegram" class="bg-sigma-pink text-white px-6 py-2.5 font-bold uppercase tracking-widest hover:bg-sigma-blue transition-all shrink-0 shadow-md">
             ЗАПИСАТЬСЯ
           </button>
         </div>
@@ -61,8 +67,8 @@ const navLinks = [
              @click="isMenuOpen = false">
             {{ link.name }}
           </a>
-          <a href="tel:+79247174852" class="text-xl text-sigma-blue font-black pt-2">8 (924) 717-48-52</a>
-          <button class="w-full bg-sigma-pink text-white py-4 font-bold uppercase tracking-widest shadow-lg">
+          <a :href="`tel:${siteConfig.phoneLink}`" class="text-xl text-sigma-blue font-black pt-2">{{ siteConfig.phone }}</a>
+          <button @click="openTelegram" class="w-full bg-sigma-pink text-white py-4 font-bold uppercase tracking-widest shadow-lg">
             ЗАПИСАТЬСЯ
           </button>
         </div>

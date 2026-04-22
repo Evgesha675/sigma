@@ -1,4 +1,6 @@
 <script setup>
+import { siteConfig } from '../config/data.js'
+
 const navLinks = [
   { name: 'О школе', href: '#about' },
   { name: 'Направления', href: '#courses' },
@@ -36,15 +38,15 @@ const navLinks = [
         <div class="md:col-span-4" data-aos="fade-up" data-aos-delay="200">
           <h4 class="footer-title">Связь</h4>
           <div class="space-y-4">
-            <a href="tel:+79247174852" class="text-xl md:text-2xl font-bold text-white block hover:text-sigma-pink transition-colors">
-              8 (924) 717-48-52
+            <a :href="`tel:${siteConfig.phoneLink}`" class="text-xl md:text-2xl font-bold text-white block hover:text-sigma-pink transition-colors">
+              {{ siteConfig.phone }}
             </a>
             <div class="space-y-1 mt-4">
               <p class="text-[10px] text-white/60 leading-relaxed uppercase tracking-widest font-bold">
-                ИП ЛЯХОВ ПАВЕЛ НИКОЛАЕВИЧ
+                {{ siteConfig.ipName }}
               </p>
               <p class="text-[10px] text-white/40 leading-relaxed uppercase tracking-widest">
-                ИНН: 381209701249 | ОГРНИП: 321385000054671
+                ИНН: {{ siteConfig.inn }} | ОГРНИП: {{ siteConfig.ogrnip }}
               </p>
               <p class="text-[10px] text-white/40 leading-relaxed uppercase tracking-widest mt-2">
                 © {{ new Date().getFullYear() }} Школа «Сигма». Все права защищены.

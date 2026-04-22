@@ -1,6 +1,7 @@
 <script setup>
-// Ссылка на ТГ или форму
-const telegramLink = 'https://t.me/your_username'
+import { siteConfig } from '../config/data.js'
+
+const telegramLink = siteConfig.telegram
 </script>
 
 <template>
@@ -40,10 +41,10 @@ const telegramLink = 'https://t.me/your_username'
             <div class="flex flex-col items-center sm:items-start">
               <span class="text-[10px] text-sigma-blue/40 uppercase tracking-[0.2em] font-bold mb-1">Или позвоните нам:</span>
               <a 
-                href="tel:+79247174852" 
+                :href="`tel:${siteConfig.phoneLink}`" 
                 class="text-2xl md:text-3xl font-black text-sigma-blue hover:text-sigma-pink transition-colors"
               >
-                8 (924) 717-48-52
+                {{ siteConfig.phone }}
               </a>
             </div>
           </div>
