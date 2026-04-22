@@ -68,27 +68,25 @@ const pauseTimer = () => {
 }
 
 const resumeTimer = () => {
-  if (!isDragging.value) {
-    resetTimer()
-  }
+  onEnd()
+  resetTimer()
 }
 
 const nextSlide = () => {
-  if (isTransitioning.value) return 
+  if (currentSlide.value >= slides.length - 1) return 
   isTransitioning.value = true
   currentSlide.value++
   resetTimer()
 }
 
 const prevSlide = () => {
-  if (isTransitioning.value) return 
+  if (currentSlide.value <= 0) return 
   isTransitioning.value = true
   currentSlide.value--
   resetTimer()
 }
 
 const goToSlide = (index) => {
-  if (isTransitioning.value) return
   isTransitioning.value = true
   currentSlide.value = initialSlides.length + index
   resetTimer()
@@ -97,9 +95,9 @@ const goToSlide = (index) => {
 const handleTransitionEnd = () => {
   isTransitioning.value = false
   if (currentSlide.value >= initialSlides.length * 2) {
-    currentSlide.value = initialSlides.length
+    currentSlide.value = currentSlide.value - initialSlides.length
   } else if (currentSlide.value < initialSlides.length) {
-    currentSlide.value = initialSlides.length * 2 - 1
+    currentSlide.value = currentSlide.value + initialSlides.length
   }
 }
 
@@ -108,12 +106,10 @@ const onStart = (e) => {
   isHorizontalSwipe.value = false
   startX.value = e.type.includes('touch') ? e.touches[0].clientX : e.clientX
   startY.value = e.type.includes('touch') ? e.touches[0].clientY : e.clientY
-  
   if (isTransitioning.value) {
     isTransitioning.value = false
     handleTransitionEnd() 
   }
-  pauseTimer()
 }
 
 const onMove = (e) => {
@@ -122,13 +118,9 @@ const onMove = (e) => {
   const y = e.type.includes('touch') ? e.touches[0].clientY : e.clientY
   const dx = x - startX.value
   const dy = y - startY.value
-
-  if (!isHorizontalSwipe.value && Math.abs(dx) > 10) {
-    if (Math.abs(dx) > Math.abs(dy)) {
-      isHorizontalSwipe.value = true
-    }
+  if (!isHorizontalSwipe.value && Math.abs(dx) > 5) {
+    if (Math.abs(dx) > Math.abs(dy)) isHorizontalSwipe.value = true
   }
-
   if (isHorizontalSwipe.value) {
     if (e.cancelable) e.preventDefault()
     swipeOffset.value = dx
@@ -137,18 +129,12 @@ const onMove = (e) => {
 
 const onEnd = () => {
   if (!isDragging.value) return
-  
-  if (isHorizontalSwipe.value) {
-    if (swipeOffset.value < -70) {
-      nextSlide()
-    } else if (swipeOffset.value > 70) {
-      prevSlide()
-    }
+  if (isHorizontalSwipe.value || Math.abs(swipeOffset.value) > 50) {
+    if (swipeOffset.value < -50) nextSlide()
+    else if (swipeOffset.value > 50) prevSlide()
   }
-  
   isDragging.value = false
   swipeOffset.value = 0
-  resumeTimer()
 }
 
 onMounted(() => {
@@ -159,15 +145,14 @@ onMounted(() => {
   })
 })
 
-onUnmounted(() => {
-  if (timer) clearInterval(timer)
-})
+onUnmounted(() => { if (timer) clearInterval(timer) })
 </script>
 
 <template>
   <section 
     class="relative w-full h-[550px] md:h-[600px] lg:h-[700px] pt-4 md:pt-0 overflow-hidden font-gothic select-none bg-white cursor-grab active:cursor-grabbing"
-    @mousedown="onStart" @mousemove="onMove" @mouseup="onEnd" @mouseleave="onEnd"
+    @mousedown="onStart" @mousemove="onMove" @mouseup="onEnd"
+    @mouseenter="pauseTimer" @mouseleave="resumeTimer"
     @touchstart="onStart" @touchmove="onMove" @touchend="onEnd"
   >
     <div 
@@ -183,22 +168,28 @@ onUnmounted(() => {
         :key="index"
         class="relative min-w-full h-full flex flex-col md:block overflow-hidden"
         :style="{ backgroundColor: slide.bgColor }"
-        :aria-hidden="index < initialSlides.length || index >= initialSlides.length * 2"
+        :aria-hidden="index < initialSlides.length || index >= initialSlides.length * 2 ? 'true' : 'false'"
       >
         <div class="relative z-20 flex-1 md:h-full flex items-start md:items-center pt-10 md:pt-0 pointer-events-none">
-          <div class="mx-auto w-full px-6 md:px-16 flex justify-start max-w-[1400px]">
+          <div 
+            class="mx-auto w-full px-6 md:px-16 flex transition-all duration-300" 
+            :class="[slide.alignRight ? 'max-w-full justify-end' : 'max-w-[1200px] justify-start']"
+          >
             <div 
-              class="w-full pointer-events-auto flex flex-col items-start text-left md:max-w-2xl md:ml-10"
-              :class="[slide.isBlueText ? 'text-[#273972]' : 'text-white']"
+              class="w-full pointer-events-auto flex flex-col"
+              :class="[
+                slide.alignRight ? 'md:max-w-xl items-center text-center md:items-end md:text-right' : 'md:max-w-3xl items-start text-left',
+                slide.isBlueText ? 'text-[#273972]' : 'text-white' 
+              ]"
             >
               <component 
-                :is="index === currentSlide ? 'h1' : 'h2'"
+                :is="index === initialSlides.length ? 'h1' : 'h2'"
                 class="text-[10vw] sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.85] mb-3 uppercase break-words"
                 :class="slide.isBlueText ? '' : 'drop-shadow-xl'"
               >
                 {{ slide.title1 }} <br />
                 <span class="text-[7vw] sm:text-3xl md:text-4xl lg:text-5xl opacity-90">
-                   - {{ slide.title2 }}
+                   {{ slide.alignRight ? '' : '- ' }}{{ slide.title2 }}
                 </span>
               </component>
               
@@ -210,6 +201,7 @@ onUnmounted(() => {
                 v-if="!slide.hideButton"
                 :href="slide.tgLink" 
                 target="_blank" 
+                :tabindex="index < initialSlides.length || index >= initialSlides.length * 2 ? '-1' : '0'"
                 class="inline-block bg-sigma-pink text-white px-10 py-4 md:px-14 md:py-6 text-sm md:text-xl font-black uppercase tracking-tighter hover:scale-105 active:scale-95 shadow-2xl transition-all"
               >
                 Записаться
@@ -222,23 +214,22 @@ onUnmounted(() => {
           <img 
             :src="slide.image" 
             draggable="false"
+            :loading="index === initialSlides.length ? 'eager' : 'lazy'"
             class="hidden md:block w-full h-full object-cover"
-            :style="{ objectPosition: slide.alignRight ? 'right center' : 'right bottom' }"
+            :style="{ objectPosition: slide.alignRight ? 'left center' : 'right bottom' }"
           />
           
           <img 
             :src="slide.image" 
             draggable="false"
-            class="md:hidden absolute top-0 w-[220%] max-w-none h-full object-contain right-0 object-right"
+            :loading="index === initialSlides.length ? 'eager' : 'lazy'"
+            class="md:hidden absolute top-0 w-[220%] max-w-none h-full object-contain"
+            :class="slide.alignRight ? 'left-0 object-left' : 'right-0 object-right'"
           />
           
           <div 
-            class="absolute inset-0 z-10"
-            :class="[
-              slide.isBlueText 
-                ? 'md:bg-gradient-to-r md:from-white/40 md:to-transparent' 
-                : 'bg-black/10 md:bg-gradient-to-r md:from-black/60 md:via-black/20 md:to-transparent'
-            ]"
+            v-if="!slide.isBlueText"
+            class="absolute inset-0 bg-black/5 md:bg-transparent md:bg-gradient-to-r md:from-black/40 md:via-black/10 md:to-transparent z-10"
           ></div>
         </div>
       </div>
@@ -248,8 +239,8 @@ onUnmounted(() => {
       <button 
         v-for="(_, index) in initialSlides" :key="index"
         @click="goToSlide(index)"
-        aria-label="Перейти к слайду"
-        class="h-1.5 md:h-2 transition-all duration-300 rounded-full shadow-md outline-none cursor-pointer"
+        aria-label="Переключить слайд"
+        class="h-1.5 md:h-2 transition-all duration-500 rounded-full shadow-md outline-none cursor-pointer"
         :class="(currentSlide % initialSlides.length) === index ? 'bg-white w-10 md:w-16' : 'bg-white/40 w-2 md:w-4 hover:bg-white/70'"
       ></button>
     </div>
