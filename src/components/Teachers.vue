@@ -15,7 +15,7 @@ const teachers = [
     name: 'Галина Петровна', 
     position: 'Преподаватель', 
     experience: '8 лет', 
-    photo: 'Галина_Петровна.png', 
+    photo: 'prepod2.png', 
     color: '#E51B51' 
   },
   { 
@@ -24,6 +24,14 @@ const teachers = [
     position: 'Преподаватель', 
     experience: '20 лет', 
     photo: 'Ольга_Николаевна.png', 
+    color: '#28A83E' 
+  },
+    { 
+    id: 4, 
+    name: 'Анастасия Владимировна ', 
+    position: 'Преподаватель', 
+    experience: '10 лет', 
+    photo: '', 
     color: '#28A83E' 
   }
 ]

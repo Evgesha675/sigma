@@ -56,18 +56,11 @@ const features = [
           data-aos-duration="1000"
           class="hidden lg:flex relative justify-center items-center"
         >
-          <div class="relative grid place-items-center w-full lg:max-w-[550px]">
-            
+          <div class="relative w-full lg:max-w-[650px]">
             <img 
-              :src="getDecorUrl('parts_1.svg')" 
-              alt="" 
-              class="visual-overlay-bg col-start-1 row-start-1 w-[140%] max-w-none z-0 pointer-events-none opacity-90" 
-            />
-
-            <img 
-              :src="getDecorUrl('boy.png')" 
-              alt="Обучение в Сигме" 
-              class="visual-overlay-main col-start-1 row-start-1 w-full h-auto drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)] z-10" 
+              :src="getDecorUrl('proektnaya_deyatelnost.png')" 
+              alt="Проектная деятельность в Сигме" 
+              class="w-full h-auto drop-shadow-[0_10px_40px_rgba(0,0,0,0.15)] visual-main" 
             />
           </div>
         </div>
@@ -78,21 +71,17 @@ const features = [
 </template>
 
 <style scoped>
-/* Grid заставляет изображения накладываться друг на друга по центру */
-.grid > img {
-  grid-area: 1 / 1 / 2 / 2;
-}
-
-.visual-overlay-bg {
-  /* Легкое смещение и масштаб для динамики */
-  transform: scale(1.1) rotate(-2deg);
-}
-
-.visual-overlay-main {
+.visual-main {
   image-rendering: -webkit-optimize-contrast;
+  /* Можно добавить легкое покачивание, если картинка выглядит скучновато */
+  animation: float 6s ease-in-out infinite;
 }
 
-/* Дополнительная страховка для заголовка на очень узких экранах */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
 @media (max-width: 400px) {
   h2 {
     font-size: 2.1rem;

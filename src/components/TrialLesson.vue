@@ -67,16 +67,18 @@ a {
 }
 
 /* Декоративный элемент на фоне, чтобы белый блок не был пустым */
-#trial-lesson::after {
-  content: 'СИГМА';
-  position: absolute;
-  right: -5%;
-  bottom: -5%;
-  font-size: 20vw;
-  font-weight: 900;
-  color: rgba(39, 57, 114, 0.03);
-  z-index: 0;
-  pointer-events: none;
-  line-height: 1;
+@media (min-width: 768px) {
+  #trial-lesson::after {
+    content: 'СИГМА';
+    position: absolute;
+    right: -5%;
+    bottom: -5%;
+    font-size: 20vw;
+    font-weight: 900;
+    color: rgba(39, 57, 114, 0.03);
+    z-index: 0;
+    pointer-events: none;
+    line-height: 1;
+  }
 }
 </style>
