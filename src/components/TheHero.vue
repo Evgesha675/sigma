@@ -43,7 +43,7 @@ const initialSlides = [
     image: image4, 
     bgColor: "#69B3D6", 
     tgLink: `${siteConfig.telegram}?start=promo_exams`,
-    alignRight: true,
+    alignRight: true, // Используем для смещения картинки вправо
     isBlueText: true 
   }
 ]
@@ -171,16 +171,10 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
         :aria-hidden="index < initialSlides.length || index >= initialSlides.length * 2 ? 'true' : 'false'"
       >
         <div class="relative z-20 flex-1 md:h-full flex items-start md:items-center pt-10 md:pt-0 pointer-events-none">
-          <div 
-            class="mx-auto w-full px-6 md:px-16 flex transition-all duration-300" 
-            :class="[slide.alignRight ? 'max-w-full justify-end' : 'max-w-[1200px] justify-start']"
-          >
+          <div class="mx-auto w-full px-6 md:px-16 flex justify-start max-w-[1400px]">
             <div 
-              class="w-full pointer-events-auto flex flex-col"
-              :class="[
-                slide.alignRight ? 'md:max-w-xl items-center text-center md:items-end md:text-right' : 'md:max-w-3xl items-start text-left',
-                slide.isBlueText ? 'text-[#273972]' : 'text-white' 
-              ]"
+              class="w-full pointer-events-auto flex flex-col items-start text-left md:max-w-2xl md:ml-10"
+              :class="[ slide.isBlueText ? 'text-[#273972]' : 'text-white' ]"
             >
               <component 
                 :is="index === initialSlides.length ? 'h1' : 'h2'"
@@ -189,7 +183,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
               >
                 {{ slide.title1 }} <br />
                 <span class="text-[7vw] sm:text-3xl md:text-4xl lg:text-5xl opacity-90">
-                   {{ slide.alignRight ? '' : '- ' }}{{ slide.title2 }}
+                   - {{ slide.title2 }}
                 </span>
               </component>
               
@@ -216,20 +210,23 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
             draggable="false"
             :loading="index === initialSlides.length ? 'eager' : 'lazy'"
             class="hidden md:block w-full h-full object-cover"
-            :style="{ objectPosition: slide.alignRight ? 'left center' : 'right bottom' }"
+            :style="{ objectPosition: slide.alignRight ? 'right center' : 'right bottom' }"
           />
           
           <img 
             :src="slide.image" 
             draggable="false"
             :loading="index === initialSlides.length ? 'eager' : 'lazy'"
-            class="md:hidden absolute top-0 w-[220%] max-w-none h-full object-contain"
-            :class="slide.alignRight ? 'left-0 object-left' : 'right-0 object-right'"
+            class="md:hidden absolute top-0 w-[220%] max-w-none h-full object-contain right-0 object-right"
           />
           
           <div 
-            v-if="!slide.isBlueText"
-            class="absolute inset-0 bg-black/5 md:bg-transparent md:bg-gradient-to-r md:from-black/40 md:via-black/10 md:to-transparent z-10"
+            class="absolute inset-0 z-10"
+            :class="[
+              slide.isBlueText 
+                ? 'md:bg-gradient-to-r md:from-white/40 md:to-transparent' 
+                : 'bg-black/10 md:bg-gradient-to-r md:from-black/60 md:via-black/20 md:to-transparent'
+            ]"
           ></div>
         </div>
       </div>
@@ -239,8 +236,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
       <button 
         v-for="(_, index) in initialSlides" :key="index"
         @click="goToSlide(index)"
-        aria-label="Переключить слайд"
-        class="h-1.5 md:h-2 transition-all duration-500 rounded-full shadow-md outline-none cursor-pointer"
+        class="h-1.5 md:h-2 transition-all duration-300 rounded-full shadow-md outline-none cursor-pointer"
         :class="(currentSlide % initialSlides.length) === index ? 'bg-white w-10 md:w-16' : 'bg-white/40 w-2 md:w-4 hover:bg-white/70'"
       ></button>
     </div>
