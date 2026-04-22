@@ -37,7 +37,3 @@
     </div>
   </section>
 </template>
-
-<script setup>
-// Скрипт не требуется
-</script>
