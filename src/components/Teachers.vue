@@ -13,7 +13,7 @@ const teachers = [
   { 
     id: 2, 
     name: 'Галина Петровна', 
-    position: 'Преподаватель', 
+    position: 'Арт-директор,Преподаватель', 
     experience: '8 лет', 
     photo: 'prepod2.png', 
     color: '#E51B51' 
@@ -21,7 +21,7 @@ const teachers = [
   { 
     id: 3, 
     name: 'Ольга Николаевна', 
-    position: 'Преподаватель', 
+    position: 'Преподаватель математики', 
     experience: '20 лет', 
     photo: 'Ольга_Николаевна.png', 
     color: '#28A83E' 
@@ -29,7 +29,7 @@ const teachers = [
     { 
     id: 4, 
     name: 'Анастасия Владимировна ', 
-    position: 'Преподаватель', 
+    position: 'Преподаватель английского языка', 
     experience: '10 лет', 
     photo: '', 
     color: '#28A83E' 

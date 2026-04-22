@@ -84,6 +84,7 @@ src/components/TheFooter.vue
 src/components/TheHeader.vue
 src/components/TheHero.vue
 src/components/TrialLesson.vue
+src/config/data.js
 src/main.js
 src/styles/fonts.css
 src/styles/main.css
@@ -873,6 +874,20 @@ export default {
 </svg>
 </file>
 
+<file path="src/config/data.js">
+export const siteConfig = {
+  phone: '8 (924) 717-48-52',
+  phoneLink: '+79247174852',
+  telegram: 'https://t.me/your_username',
+  vk: 'https://vk.com/your_profile',
+  instagram: 'https://instagram.com/your_username',
+  ipName: 'ИП ЛЯХОВ ПАВЕЛ НИКОЛАЕВИЧ',
+  inn: '381209701249',
+  ogrnip: '321385000054671',
+  email: 'm4cwin@ya.ru'
+}
+</file>
+
 <file path="src/styles/fonts.css">
 @font-face {
   font-family: 'Century Gothic';
@@ -1028,10 +1043,32 @@ const features = [
 </style>
 </file>
 
+<file path="src/main.js">
+import { createApp } from 'vue'
+import App from './App.vue'
+import './styles/main.css'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+
+AOS.init({
+  duration: 1000,
+  once: true,
+  offset: 0, // Убираем глобальный отступ для всех анимаций
+  startEvent: 'DOMContentLoaded', // Запуск сразу после загрузки структуры
+});
+
+// Дополнительный "пинок" для мобилок:
+window.addEventListener('load', () => {
+  AOS.refresh();
+});
+createApp(App).mount('#app')
+</file>
+
 <file path="src/components/TrialLesson.vue">
 <script setup>
-// Ссылка на ТГ или форму
-const telegramLink = 'https://t.me/your_username'
+import { siteConfig } from '../config/data.js'
+
+const telegramLink = siteConfig.telegram
 </script>
 
 <template>
@@ -1071,10 +1108,10 @@ const telegramLink = 'https://t.me/your_username'
             <div class="flex flex-col items-center sm:items-start">
               <span class="text-[10px] text-sigma-blue/40 uppercase tracking-[0.2em] font-bold mb-1">Или позвоните нам:</span>
               <a 
-                href="tel:+79247174852" 
+                :href="`tel:${siteConfig.phoneLink}`" 
                 class="text-2xl md:text-3xl font-black text-sigma-blue hover:text-sigma-pink transition-colors"
               >
-                8 (924) 717-48-52
+                {{ siteConfig.phone }}
               </a>
             </div>
           </div>
@@ -1111,274 +1148,6 @@ a {
     pointer-events: none;
     line-height: 1;
   }
-}
-</style>
-</file>
-
-<file path="src/main.js">
-import { createApp } from 'vue'
-import App from './App.vue'
-import './styles/main.css'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
-
-AOS.init({
-  duration: 1000,
-  once: true,
-  offset: 0, // Убираем глобальный отступ для всех анимаций
-  startEvent: 'DOMContentLoaded', // Запуск сразу после загрузки структуры
-});
-
-// Дополнительный "пинок" для мобилок:
-window.addEventListener('load', () => {
-  AOS.refresh();
-});
-createApp(App).mount('#app')
-</file>
-
-<file path="index.html">
-<!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/assets/logo/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <title>IT-Школа СИГМА | Программирование и робототехника для детей</title>
-    <meta name="description" content="Обучение программированию, 3D-моделированию и робототехнике детей и подростков в Иркутской области. Первое занятие бесплатно. Запишитесь на летний интенсив!" />
-    <meta name="keywords" content="школа программирования, курсы для детей, робототехника, 3D моделирование, IT школа, Иркутск, Слюдянка" />
-    <meta name="author" content="Школа СИГМА" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="IT-Школа СИГМА | Раскрой потенциал своего ребенка" />
-    <meta property="og:description" content="Запишитесь на бесплатный пробный урок. Мы подберем идеальное IT-направление для вашего ребенка!" />
-    <meta property="og:url" content="https://sigma-school.ru/" />
-    <meta property="og:image" content="/og-image.jpg" />
-    <meta name="format-detection" content="telephone=no" />
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
-</html>
-</file>
-
-<file path="src/components/Contacts.vue">
-<script setup>
-import { ref } from 'vue'
-
-const phoneNumber = '8 (924) 717-48-52'
-const rawPhone = '79247174852'
-
-const locations = [
-  {
-    city: 'Иркутск',
-    address: 'Баумана, 237/4',
-    mapLink: 'https://yandex.ru/map-widget/v1/?ll=104.154862%2C52.350014&mode=whatshere&utm_source=share&whatshere%5Bpoint%5D=104.147521%2C52.351109&whatshere%5Bzoom%5D=17&z=16'
-  },
-  {
-    city: 'Иркутск',
-    address: 'Солнечная, 3',
-    mapLink: 'https://yandex.ru/map-widget/v1/?ll=104.423511%2C52.237667&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgoxNTY5MDI3NTcyEo0B0KDQvtGB0YHQuNGPLCDQmNGA0LrRg9GC0YHQutC40Lkg0LzRg9C90LjRhtC40L_QsNC70YzQvdGL0Lkg0L7QutGA0YPQsywg0L_QvtGB0ZHQu9C-0Log0JzQvtC70L7QtNGR0LbQvdGL0LksINCh0L7Qu9C90LXRh9C90LDRjyDRg9C70LjRhtCwLCAzIgoN19jQQhVf81BC&tab=inside&utm_source=share&z=17.19'
-  },
-  {
-    city: 'Большой Луг',
-    address: 'Клубная улица, 2а',
-    mapLink: 'https://yandex.ru/map-widget/v1/?ll=104.077083%2C52.054958&mode=whatshere&utm_source=share&whatshere%5Bpoint%5D=104.076098%2C52.055465&whatshere%5Bzoom%5D=17&z=17.9'
-  },
-  {
-    city: 'Слюдянка',
-    address: 'Кутелева, 42',
-    mapLink: 'https://yandex.ru/map-widget/v1/?l=pht&ll=103.722447%2C51.650913&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgoxNDk5NjY3NDE2EnrQoNC-0YHRgdC40Y8sINCY0YDQutGD0YLRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwg0KHQu9GO0LTRj9C90LrQsCwg0YPQu9C40YbQsCDQuNC80LXQvdC4INCc0LDQudC-0YDQsCDQmtGD0YLQtdC70LXQstCwLCA0MiIKDeRxz0IViZpOQg%2C%2C&utm_source=share&z=17.19'
-  }
-]
-
-const activeIndex = ref(0)
-</script>
-
-<template>
-  <section id="contacts" class="bg-sigma-blue py-16 md:py-28 px-4 font-gothic relative overflow-hidden">
-    <div class="main-container flex flex-col md:flex-row gap-12 md:gap-20 items-stretch relative z-10">
-      
-      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
-        <h2 class="vertical-title text-5xl lg:text-6xl font-bold text-white uppercase tracking-tighter">
-          Контакты
-        </h2>
-      </div>
-
-      <h2 class="md:hidden text-4xl font-bold text-white uppercase tracking-tighter mb-10 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
-        Контакты
-      </h2>
-
-      <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
-        
-        <div class="space-y-6 md:space-y-10 order-2 lg:order-1" data-aos="fade-up">
-          <div class="space-y-4 md:space-y-6">
-            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block opacity-60">Наши филиалы</span>
-            <div class="flex flex-col gap-2 md:gap-4">
-              <button 
-                v-for="(loc, index) in locations" 
-                :key="index"
-                @click="activeIndex = index"
-                class="text-left p-3 md:p-4 border-l-2 transition-all duration-300 outline-none group"
-                :class="activeIndex === index 
-                  ? 'border-sigma-pink bg-white/10 shadow-lg' 
-                  : 'border-white/10 hover:border-white/40 bg-transparent'"
-              >
-                <span class="block text-[9px] md:text-[10px] uppercase opacity-50 text-white mb-0.5 md:mb-1 group-hover:opacity-100 transition-opacity">{{ loc.city }}</span>
-                <p class="text-base md:text-lg lg:text-xl text-white font-bold leading-tight transition-colors">{{ loc.address }}</p>
-              </button>
-            </div>
-          </div>
-
-          <div class="contact-block">
-            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-3 opacity-60">Запись по телефону</span>
-            <a :href="`tel:${rawPhone}`" class="text-2xl md:text-3xl lg:text-4xl font-black text-white hover:text-sigma-pink transition-colors">
-              {{ phoneNumber }}
-            </a>
-          </div>
-
-          <div class="contact-block">
-            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-4 opacity-60">Мы в сети</span>
-            <div class="flex gap-6">
-              <a href="https://vk.com/your_profile" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/vk/white" alt="VK" />
-              </a>
-              <a href="https://t.me/your_username" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/telegram/white" alt="Telegram" />
-              </a>
-              <a href="https://instagram.com/your_username" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/instagram/white" alt="Instagram" />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div 
-          class="map-container overflow-hidden rounded-none relative shadow-2xl order-1 lg:order-2"
-          data-aos="zoom-in"
-        >
-          <transition name="fade" mode="out-in">
-            <iframe 
-              :key="activeIndex"
-              :src="locations[activeIndex].mapLink" 
-              class="absolute inset-0 w-full h-full border-0 grayscale-[0.2] contrast-[1.1]"
-              allowfullscreen="true"
-              loading="lazy"
-            ></iframe>
-          </transition>
-        </div>
-
-      </div>
-    </div>
-  </section>
-</template>
-
-<style scoped>
-.vertical-title {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  white-space: nowrap;
-}
-
-.map-container {
-  @apply w-full h-[350px] md:h-[450px] lg:h-[650px] bg-white/5 border border-white/10;
-}
-
-/* Анимация перехода между картами */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.4s ease-in-out;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
-</file>
-
-<file path="src/components/TheFooter.vue">
-<script setup>
-const navLinks = [
-  { name: 'О школе', href: '#about' },
-  { name: 'Направления', href: '#courses' },
-  { name: 'Проекты', href: '#project-activity' },
-  { name: 'Преподаватели', href: '#teachers' },
-  { name: 'Контакты', href: '#contacts' },
-]
-</script>
-
-<template>
-  <footer class="bg-sigma-blue pt-20 pb-10 px-4 font-gothic border-t border-white/5 overflow-hidden">
-    <div class="main-container">
-      
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
-        
-        <div class="md:col-span-5 space-y-6" data-aos="fade-up">
-          <div class="flex items-center">
-            <img src="../assets/logo/logo.svg" alt="СИГМА" class="h-6 md:h-8 w-auto brightness-0 invert" />
-          </div>
-          <p class="text-white/60 text-sm max-w-sm leading-relaxed uppercase tracking-wider">
-            Школа программирования для детей и подростков в Иркутской области. 
-            Обучаем технологиям будущего через создание реальных проектов.
-          </p>
-        </div>
-
-        <div class="md:col-span-3" data-aos="fade-up" data-aos-delay="100">
-          <h4 class="footer-title">Навигация</h4>
-          <nav class="flex flex-col gap-3">
-            <a v-for="link in navLinks" :key="link.name" :href="link.href" class="footer-link">
-              {{ link.name }}
-            </a>
-          </nav>
-        </div>
-
-        <div class="md:col-span-4" data-aos="fade-up" data-aos-delay="200">
-          <h4 class="footer-title">Связь</h4>
-          <div class="space-y-4">
-            <a href="tel:+79247174852" class="text-xl md:text-2xl font-bold text-white block hover:text-sigma-pink transition-colors">
-              8 (924) 717-48-52
-            </a>
-            <div class="space-y-1 mt-4">
-              <p class="text-[10px] text-white/60 leading-relaxed uppercase tracking-widest font-bold">
-                ИП ЛЯХОВ ПАВЕЛ НИКОЛАЕВИЧ
-              </p>
-              <p class="text-[10px] text-white/40 leading-relaxed uppercase tracking-widest">
-                ИНН: 381209701249 | ОГРНИП: 321385000054671
-              </p>
-              <p class="text-[10px] text-white/40 leading-relaxed uppercase tracking-widest mt-2">
-                © {{ new Date().getFullYear() }} Школа «Сигма». Все права защищены.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="flex flex-wrap justify-center md:justify-start gap-6 text-[10px] uppercase tracking-[0.2em]">
-          <a href="/privacy.html" target="_blank" class="text-white/30 hover:text-white transition-colors">Политика конфиденциальности</a>
-          <a href="#" class="text-white/30 hover:text-white transition-colors" @click.prevent>Договор оферты</a>
-        </div>
-        
-        <div class="text-[10px] text-white/20 uppercase tracking-widest">
-          Разработка: <a href="#" class="hover:text-sigma-pink transition-colors">IT_ART</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-</template>
-
-<style scoped>
-.footer-title {
-  @apply text-white text-[10px] font-black uppercase tracking-[0.3em] mb-6 block border-l-2 border-sigma-pink pl-3;
-}
-
-.footer-link {
-  @apply text-white/60 text-xs font-bold uppercase tracking-widest hover:text-sigma-pink transition-colors duration-300;
-}
-
-.brightness-0.invert {
-  filter: brightness(0) invert(1);
-  opacity: 0.9;
 }
 </style>
 </file>
@@ -1480,6 +1249,32 @@ body {
 }
 </file>
 
+<file path="index.html">
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/src/assets/logo/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    
+    <title>IT-Школа СИГМА | Программирование и робототехника для детей</title>
+    <meta name="description" content="Обучение программированию, 3D-моделированию и робототехнике детей в Иркутске и Слюдянке. Первый урок бесплатно!" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="IT-Школа СИГМА | Раскрой потенциал ребенка" />
+    <meta property="og:url" content="https://sigma-school.ru/" />
+    <meta property="og:image" content="/og-image.jpg" />
+    
+    <meta name="format-detection" content="telephone=no" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
+</file>
+
 <file path="src/components/AboutUs.vue">
 <template>
   <section id="about" class="bg-white py-16 md:py-28 px-4 w-full font-gothic">
@@ -1524,6 +1319,142 @@ body {
 <script setup>
 // Скрипт не требуется
 </script>
+</file>
+
+<file path="src/components/Contacts.vue">
+<script setup>
+import { ref } from 'vue'
+import { siteConfig } from '../config/data.js'
+
+const phoneNumber = siteConfig.phone
+const rawPhone = siteConfig.phoneLink.replace(/\D/g, '')
+
+const locations = [
+  {
+    city: 'Иркутск',
+    address: 'Баумана, 237/4',
+    mapLink: 'https://yandex.ru/map-widget/v1/?ll=104.154862%2C52.350014&mode=whatshere&utm_source=share&whatshere%5Bpoint%5D=104.147521%2C52.351109&whatshere%5Bzoom%5D=17&z=16'
+  },
+  {
+    city: 'Иркутск',
+    address: 'Солнечная, 3',
+    mapLink: 'https://yandex.ru/map-widget/v1/?ll=104.423511%2C52.237667&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgoxNTY5MDI3NTcyEo0B0KDQvtGB0YHQuNGPLCDQmNGA0LrRg9GC0YHQutC40Lkg0LzRg9C90LjRhtC40L_QsNC70YzQvdGL0Lkg0L7QutGA0YPQsywg0L_QvtGB0ZHQu9C-0Log0JzQvtC70L7QtNGR0LbQvdGL0LksINCh0L7Qu9C90LXRh9C90LDRjyDRg9C70LjRhtCwLCAzIgoN19jQQhVf81BC&tab=inside&utm_source=share&z=17.19'
+  },
+  {
+    city: 'Большой Луг',
+    address: 'Клубная улица, 2а',
+    mapLink: 'https://yandex.ru/map-widget/v1/?ll=104.077083%2C52.054958&mode=whatshere&utm_source=share&whatshere%5Bpoint%5D=104.076098%2C52.055465&whatshere%5Bzoom%5D=17&z=17.9'
+  },
+  {
+    city: 'Слюдянка',
+    address: 'Кутелева, 42',
+    mapLink: 'https://yandex.ru/map-widget/v1/?l=pht&ll=103.722447%2C51.650913&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgoxNDk5NjY3NDE2EnrQoNC-0YHRgdC40Y8sINCY0YDQutGD0YLRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwg0KHQu9GO0LTRj9C90LrQsCwg0YPQu9C40YbQsCDQuNC80LXQvdC4INCc0LDQudC-0YDQsCDQmtGD0YLQtdC70LXQstCwLCA0MiIKDeRxz0IViZpOQg%2C%2C&utm_source=share&z=17.19'
+  }
+]
+
+const activeIndex = ref(0)
+</script>
+
+<template>
+  <section id="contacts" class="bg-sigma-blue py-16 md:py-28 px-4 font-gothic relative overflow-hidden">
+    <div class="main-container flex flex-col md:flex-row gap-12 md:gap-20 items-stretch relative z-10">
+      
+      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
+        <h2 class="vertical-title text-5xl lg:text-6xl font-bold text-white uppercase tracking-tighter">
+          Контакты
+        </h2>
+      </div>
+
+      <h2 class="md:hidden text-4xl font-bold text-white uppercase tracking-tighter mb-10 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
+        Контакты
+      </h2>
+
+      <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
+        
+        <div class="space-y-6 md:space-y-10 order-2 lg:order-1" data-aos="fade-up">
+          <div class="space-y-4 md:space-y-6">
+            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block opacity-60">Наши филиалы</span>
+            <div class="flex flex-col gap-2 md:gap-4">
+              <button 
+                v-for="(loc, index) in locations" 
+                :key="index"
+                @click="activeIndex = index"
+                class="text-left p-3 md:p-4 border-l-2 transition-all duration-300 outline-none group"
+                :class="activeIndex === index 
+                  ? 'border-sigma-pink bg-white/10 shadow-lg' 
+                  : 'border-white/10 hover:border-white/40 bg-transparent'"
+              >
+                <span class="block text-[9px] md:text-[10px] uppercase opacity-50 text-white mb-0.5 md:mb-1 group-hover:opacity-100 transition-opacity">{{ loc.city }}</span>
+                <p class="text-base md:text-lg lg:text-xl text-white font-bold leading-tight transition-colors">{{ loc.address }}</p>
+              </button>
+            </div>
+          </div>
+
+          <div class="contact-block">
+            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-3 opacity-60">Запись по телефону</span>
+            <a :href="`tel:${rawPhone}`" class="text-2xl md:text-3xl lg:text-4xl font-black text-white hover:text-sigma-pink transition-colors">
+              {{ phoneNumber }}
+            </a>
+          </div>
+
+          <div class="contact-block">
+            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-4 opacity-60">Мы в сети</span>
+            <div class="flex gap-6">
+              <a :href="siteConfig.vk" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
+                <img height="32" width="32" src="https://cdn.simpleicons.org/vk/white" alt="VK" />
+              </a>
+              <a :href="siteConfig.telegram" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
+                <img height="32" width="32" src="https://cdn.simpleicons.org/telegram/white" alt="Telegram" />
+              </a>
+              <a :href="siteConfig.instagram" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
+                <img height="32" width="32" src="https://cdn.simpleicons.org/instagram/white" alt="Instagram" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div 
+          class="map-container overflow-hidden rounded-none relative shadow-2xl order-1 lg:order-2"
+          data-aos="zoom-in"
+        >
+          <transition name="fade" mode="out-in">
+            <iframe 
+              :key="activeIndex"
+              :src="locations[activeIndex].mapLink" 
+              class="absolute inset-0 w-full h-full border-0 grayscale-[0.2] contrast-[1.1]"
+              allowfullscreen="true"
+              loading="lazy"
+            ></iframe>
+          </transition>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.vertical-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+}
+
+.map-container {
+  @apply w-full h-[350px] md:h-[450px] lg:h-[650px] bg-white/5 border border-white/10;
+}
+
+/* Анимация перехода между картами */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
 </file>
 
 <file path="src/components/Courses.vue">
@@ -1773,79 +1704,93 @@ const getTeacherPhoto = (name) => {
 </style>
 </file>
 
-<file path="src/components/TheHeader.vue">
+<file path="src/components/TheFooter.vue">
 <script setup>
-import { ref } from 'vue'
-
-const isMenuOpen = ref(false)
+import { siteConfig } from '../config/data.js'
 
 const navLinks = [
-  { name: 'О школе', href: '#about' },  
+  { name: 'О школе', href: '#about' },
   { name: 'Направления', href: '#courses' },
+  { name: 'Проекты', href: '#project-activity' },
   { name: 'Преподаватели', href: '#teachers' },
   { name: 'Контакты', href: '#contacts' },
 ]
 </script>
+
 <template>
-  <header class="fixed top-0 left-0 w-full bg-white shadow-md z-[100] font-gothic">
+  <footer class="bg-sigma-blue pt-20 pb-10 px-4 font-gothic border-t border-white/5 overflow-hidden">
     <div class="main-container">
-      <div class="flex justify-between items-center h-20 px-4">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
         
-        <div class="flex-shrink-0">
-          <img src="../assets/logo/logo.svg" alt="СИГМА" class="h-6 sm:h-8 w-auto" />
+        <div class="md:col-span-5 space-y-6" data-aos="fade-up">
+          <div class="flex items-center">
+            <img src="../assets/logo/logo.svg" alt="СИГМА" class="h-6 md:h-8 w-auto brightness-0 invert" />
+          </div>
+          <p class="text-white/60 text-sm max-w-sm leading-relaxed uppercase tracking-wider">
+            Школа программирования для детей и подростков в Иркутской области. 
+            Обучаем технологиям будущего через создание реальных проектов.
+          </p>
         </div>
 
-        <nav class="hidden lg:flex items-center space-x-6 xl:space-x-10">
-          <a v-for="link in navLinks" :key="link.name" :href="link.href" 
-             class="text-sigma-blue font-bold uppercase text-sm hover:text-sigma-pink transition-colors whitespace-nowrap">
-            {{ link.name }}
-          </a>
-        </nav>
-
-        <div class="hidden lg:flex items-center gap-6">
-          <a href="tel:+79247174852" class="text-sigma-blue font-bold whitespace-nowrap text-sm xl:text-base">
-            8 (924) 717-48-52
-          </a>
-          <button class="bg-sigma-pink text-white px-6 py-2.5 font-bold uppercase tracking-widest hover:bg-sigma-blue transition-all shrink-0 shadow-md">
-            ЗАПИСАТЬСЯ
-          </button>
+        <div class="md:col-span-3" data-aos="fade-up" data-aos-delay="100">
+          <h4 class="footer-title">Навигация</h4>
+          <nav class="flex flex-col gap-3">
+            <a v-for="link in navLinks" :key="link.name" :href="link.href" class="footer-link">
+              {{ link.name }}
+            </a>
+          </nav>
         </div>
 
-        <div class="lg:hidden flex items-center">
-          <button @click="isMenuOpen = !isMenuOpen" class="text-sigma-blue p-2 outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path v-if="!isMenuOpen" d="M4 6h16M4 12h16M4 18h16" stroke-width="2" stroke-linecap="round"/>
-              <path v-else d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
+        <div class="md:col-span-4" data-aos="fade-up" data-aos-delay="200">
+          <h4 class="footer-title">Связь</h4>
+          <div class="space-y-4">
+            <a :href="`tel:${siteConfig.phoneLink}`" class="text-xl md:text-2xl font-bold text-white block hover:text-sigma-pink transition-colors">
+              {{ siteConfig.phone }}
+            </a>
+            <div class="space-y-1 mt-4">
+              <p class="text-[10px] text-white/60 leading-relaxed uppercase tracking-widest font-bold">
+                {{ siteConfig.ipName }}
+              </p>
+              <p class="text-[10px] text-white/40 leading-relaxed uppercase tracking-widest">
+                ИНН: {{ siteConfig.inn }} | ОГРНИП: {{ siteConfig.ogrnip }}
+              </p>
+              <p class="text-[10px] text-white/40 leading-relaxed uppercase tracking-widest mt-2">
+                © {{ new Date().getFullYear() }} Школа «Сигма». Все права защищены.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex flex-wrap justify-center md:justify-start gap-6 text-[10px] uppercase tracking-[0.2em]">
+          <a href="/privacy.html" target="_blank" class="text-white/30 hover:text-white transition-colors">Политика конфиденциальности</a>
+          <a href="#" class="text-white/30 hover:text-white transition-colors" @click.prevent>Договор оферты</a>
+        </div>
+        
+        <div class="text-[10px] text-white/20 uppercase tracking-widest">
+          Разработка: <a href="#" class="hover:text-sigma-pink transition-colors">IT_ART</a>
         </div>
       </div>
     </div>
+  </footer>
+</template>
 
-    <transition
-      enter-active-class="transition duration-300 ease-out"
-      enter-from-class="opacity-0 -translate-y-10"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition duration-200 ease-in"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 -translate-y-10"
-    >
-      <div v-if="isMenuOpen" class="lg:hidden bg-white border-t border-gray-100 absolute top-20 left-0 w-full shadow-2xl z-50 pb-8">
-        <div class="flex flex-col p-6 space-y-4">
-          <a v-for="link in navLinks" :key="link.name" :href="link.href" 
-             class="text-sigma-blue font-bold uppercase text-lg border-b border-gray-50 pb-2" 
-             @click="isMenuOpen = false">
-            {{ link.name }}
-          </a>
-          <a href="tel:+79247174852" class="text-xl text-sigma-blue font-black pt-2">8 (924) 717-48-52</a>
-          <button class="w-full bg-sigma-pink text-white py-4 font-bold uppercase tracking-widest shadow-lg">
-            ЗАПИСАТЬСЯ
-          </button>
-        </div>
-      </div>
-    </transition>
-  </header>
-  </template>
+<style scoped>
+.footer-title {
+  @apply text-white text-[10px] font-black uppercase tracking-[0.3em] mb-6 block border-l-2 border-sigma-pink pl-3;
+}
+
+.footer-link {
+  @apply text-white/60 text-xs font-bold uppercase tracking-widest hover:text-sigma-pink transition-colors duration-300;
+}
+
+.brightness-0.invert {
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+</style>
 </file>
 
 <file path="tailwind.config.js">
@@ -1928,6 +1873,87 @@ export default {
 }
 </file>
 
+<file path="src/components/TheHeader.vue">
+<script setup>
+import { ref } from 'vue'
+import { siteConfig } from '../config/data.js'
+
+const isMenuOpen = ref(false)
+
+const openTelegram = () => {
+  window.open(siteConfig.telegram, '_blank')
+  isMenuOpen.value = false
+}
+
+const navLinks = [
+  { name: 'О школе', href: '#about' },  
+  { name: 'Направления', href: '#courses' },
+  { name: 'Преподаватели', href: '#teachers' },
+  { name: 'Контакты', href: '#contacts' },
+]
+</script>
+<template>
+  <header class="fixed top-0 left-0 w-full bg-white shadow-md z-[100] font-gothic">
+    <div class="main-container">
+      <div class="flex justify-between items-center h-20 px-4">
+        
+        <div class="flex-shrink-0">
+          <img src="../assets/logo/logo.svg" alt="СИГМА" class="h-6 sm:h-8 w-auto" />
+        </div>
+
+        <nav class="hidden lg:flex items-center space-x-6 xl:space-x-10">
+          <a v-for="link in navLinks" :key="link.name" :href="link.href" 
+             class="text-sigma-blue font-bold uppercase text-sm hover:text-sigma-pink transition-colors whitespace-nowrap">
+            {{ link.name }}
+          </a>
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-6">
+          <a :href="`tel:${siteConfig.phoneLink}`" class="text-sigma-blue font-bold whitespace-nowrap text-sm xl:text-base">
+            {{ siteConfig.phone }}
+          </a>
+          <button @click="openTelegram" class="bg-sigma-pink text-white px-6 py-2.5 font-bold uppercase tracking-widest hover:bg-sigma-blue transition-all shrink-0 shadow-md">
+            ЗАПИСАТЬСЯ
+          </button>
+        </div>
+
+        <div class="lg:hidden flex items-center">
+          <button @click="isMenuOpen = !isMenuOpen" class="text-sigma-blue p-2 outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path v-if="!isMenuOpen" d="M4 6h16M4 12h16M4 18h16" stroke-width="2" stroke-linecap="round"/>
+              <path v-else d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <transition
+      enter-active-class="transition duration-300 ease-out"
+      enter-from-class="opacity-0 -translate-y-10"
+      enter-to-class="opacity-100 translate-y-0"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="opacity-100 translate-y-0"
+      leave-to-class="opacity-0 -translate-y-10"
+    >
+      <div v-if="isMenuOpen" class="lg:hidden bg-white border-t border-gray-100 absolute top-20 left-0 w-full shadow-2xl z-50 pb-8">
+        <div class="flex flex-col p-6 space-y-4">
+          <a v-for="link in navLinks" :key="link.name" :href="link.href" 
+             class="text-sigma-blue font-bold uppercase text-lg border-b border-gray-50 pb-2" 
+             @click="isMenuOpen = false">
+            {{ link.name }}
+          </a>
+          <a :href="`tel:${siteConfig.phoneLink}`" class="text-xl text-sigma-blue font-black pt-2">{{ siteConfig.phone }}</a>
+          <button @click="openTelegram" class="w-full bg-sigma-pink text-white py-4 font-bold uppercase tracking-widest shadow-lg">
+            ЗАПИСАТЬСЯ
+          </button>
+        </div>
+      </div>
+    </transition>
+  </header>
+  </template>
+</file>
+
 <file path="src/components/TheHero.vue">
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
@@ -1990,7 +2016,7 @@ let timer = null
 
 const resetTimer = () => {
   if (timer) clearInterval(timer)
-  timer = setInterval(nextSlide, 8000)
+  timer = setInterval(nextSlide, 3000)
 }
 
 const pauseTimer = () => {
@@ -2089,7 +2115,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
       class="flex h-full w-full will-change-transform"
       :style="{ 
         transform: `translate3d(calc(${-currentSlide * 100}% + ${swipeOffset}px), 0, 0)`,
-        transition: isDragging || !isTransitioning ? 'none' : 'transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)'
+        transition: isDragging || !isTransitioning ? 'none' : 'transform 1s cubic-bezier(0.25, 1, 0.5, 1)'
       }"
       @transitionend="handleTransitionEnd"
     >
@@ -2102,13 +2128,15 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
       >
         <div class="relative z-20 flex-1 md:h-full flex items-start md:items-center pt-10 md:pt-0 pointer-events-none">
           <div 
-            class="mx-auto w-full px-6 md:px-16 flex transition-all duration-300" 
-            :class="[slide.alignRight ? 'max-w-full justify-end' : 'max-w-[1200px] justify-start']"
+            class="w-full px-6 md:px-16 flex transition-all duration-500" 
+            :class="[slide.alignRight ? 'justify-end' : 'justify-start']"
           >
             <div 
               class="w-full pointer-events-auto flex flex-col"
               :class="[
-                slide.alignRight ? 'md:max-w-xl items-center text-center md:items-end md:text-right' : 'md:max-w-3xl items-start text-left',
+                slide.alignRight 
+                  ? 'md:max-w-xl items-center text-center md:items-end md:text-right' 
+                  : 'md:max-w-3xl items-start text-left',
                 slide.isBlueText ? 'text-[#273972]' : 'text-white' 
               ]"
             >
@@ -2170,7 +2198,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
         v-for="(_, index) in initialSlides" :key="index"
         @click="goToSlide(index)"
         aria-label="Переключить слайд"
-        class="h-1.5 md:h-2 transition-all duration-500 rounded-full shadow-md outline-none cursor-pointer"
+        class="h-1.5 md:h-2 transition-all duration-300 rounded-full shadow-md outline-none cursor-pointer"
         :class="(currentSlide % initialSlides.length) === index ? 'bg-white w-10 md:w-16' : 'bg-white/40 w-2 md:w-4 hover:bg-white/70'"
       ></button>
     </div>
@@ -2181,6 +2209,13 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 img {
   backface-visibility: hidden;
   transform: translateZ(0);
+}
+/* Плавная коррекция для мобильных, чтобы текст не сливался с краем */
+@media (max-width: 768px) {
+  .px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 </style>
 </file>

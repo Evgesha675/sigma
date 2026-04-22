@@ -59,7 +59,7 @@ let timer = null
 
 const resetTimer = () => {
   if (timer) clearInterval(timer)
-  timer = setInterval(nextSlide, 8000)
+  timer = setInterval(nextSlide, 3000)
 }
 
 const pauseTimer = () => {
@@ -158,7 +158,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
       class="flex h-full w-full will-change-transform"
       :style="{ 
         transform: `translate3d(calc(${-currentSlide * 100}% + ${swipeOffset}px), 0, 0)`,
-        transition: isDragging || !isTransitioning ? 'none' : 'transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)'
+        transition: isDragging || !isTransitioning ? 'none' : 'transform 1s cubic-bezier(0.25, 1, 0.5, 1)'
       }"
       @transitionend="handleTransitionEnd"
     >
@@ -171,13 +171,15 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
       >
         <div class="relative z-20 flex-1 md:h-full flex items-start md:items-center pt-10 md:pt-0 pointer-events-none">
           <div 
-            class="mx-auto w-full px-6 md:px-16 flex transition-all duration-300" 
-            :class="[slide.alignRight ? 'max-w-full justify-end' : 'max-w-[1200px] justify-start']"
+            class="w-full px-6 md:px-16 flex transition-all duration-500" 
+            :class="[slide.alignRight ? 'justify-end' : 'justify-start']"
           >
             <div 
               class="w-full pointer-events-auto flex flex-col"
               :class="[
-                slide.alignRight ? 'md:max-w-xl items-center text-center md:items-end md:text-right' : 'md:max-w-3xl items-start text-left',
+                slide.alignRight 
+                  ? 'md:max-w-xl items-center text-center md:items-end md:text-right' 
+                  : 'md:max-w-3xl items-start text-left',
                 slide.isBlueText ? 'text-[#273972]' : 'text-white' 
               ]"
             >
@@ -239,7 +241,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
         v-for="(_, index) in initialSlides" :key="index"
         @click="goToSlide(index)"
         aria-label="Переключить слайд"
-        class="h-1.5 md:h-2 transition-all duration-500 rounded-full shadow-md outline-none cursor-pointer"
+        class="h-1.5 md:h-2 transition-all duration-300 rounded-full shadow-md outline-none cursor-pointer"
         :class="(currentSlide % initialSlides.length) === index ? 'bg-white w-10 md:w-16' : 'bg-white/40 w-2 md:w-4 hover:bg-white/70'"
       ></button>
     </div>
@@ -250,5 +252,12 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 img {
   backface-visibility: hidden;
   transform: translateZ(0);
+}
+/* Плавная коррекция для мобильных, чтобы текст не сливался с краем */
+@media (max-width: 768px) {
+  .px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 </style>

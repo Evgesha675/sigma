@@ -12,7 +12,7 @@ const locations = [
     mapLink: 'https://yandex.ru/map-widget/v1/?ll=104.154862%2C52.350014&mode=whatshere&utm_source=share&whatshere%5Bpoint%5D=104.147521%2C52.351109&whatshere%5Bzoom%5D=17&z=16'
   },
   {
-    city: 'Иркутск',
+    city: 'Молодёжный',
     address: 'Солнечная, 3',
     mapLink: 'https://yandex.ru/map-widget/v1/?ll=104.423511%2C52.237667&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgoxNTY5MDI3NTcyEo0B0KDQvtGB0YHQuNGPLCDQmNGA0LrRg9GC0YHQutC40Lkg0LzRg9C90LjRhtC40L_QsNC70YzQvdGL0Lkg0L7QutGA0YPQsywg0L_QvtGB0ZHQu9C-0Log0JzQvtC70L7QtNGR0LbQvdGL0LksINCh0L7Qu9C90LXRh9C90LDRjyDRg9C70LjRhtCwLCAzIgoN19jQQhVf81BC&tab=inside&utm_source=share&z=17.19'
   },
