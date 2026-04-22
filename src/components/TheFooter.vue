@@ -2,7 +2,7 @@
 const navLinks = [
   { name: 'О школе', href: '#about' },
   { name: 'Направления', href: '#courses' },
-  { name: 'Проекты', href: '#project-activity' }, // Добавили ссылку на блок проектной деятельности
+  { name: 'Проекты', href: '#project-activity' },
   { name: 'Преподаватели', href: '#teachers' },
   { name: 'Контакты', href: '#contacts' },
 ]
@@ -39,11 +39,14 @@ const navLinks = [
             <a href="tel:+79247174852" class="text-xl md:text-2xl font-bold text-white block hover:text-sigma-pink transition-colors">
               8 (924) 717-48-52
             </a>
-            <div class="space-y-1">
-               <p class="text-[10px] text-white/40 leading-relaxed uppercase tracking-widest">
-                ИНН: 381100000000 | ОГРНИП: 314385000000000
+            <div class="space-y-1 mt-4">
+              <p class="text-[10px] text-white/60 leading-relaxed uppercase tracking-widest font-bold">
+                ИП ЛЯХОВ ПАВЕЛ НИКОЛАЕВИЧ
               </p>
               <p class="text-[10px] text-white/40 leading-relaxed uppercase tracking-widest">
+                ИНН: 381209701249 | ОГРНИП: 321385000054671
+              </p>
+              <p class="text-[10px] text-white/40 leading-relaxed uppercase tracking-widest mt-2">
                 © {{ new Date().getFullYear() }} Школа «Сигма». Все права защищены.
               </p>
             </div>
@@ -53,8 +56,8 @@ const navLinks = [
 
       <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
         <div class="flex flex-wrap justify-center md:justify-start gap-6 text-[10px] uppercase tracking-[0.2em]">
-          <a href="#" class="text-white/30 hover:text-white transition-colors">Политика конфиденциальности</a>
-          <a href="#" class="text-white/30 hover:text-white transition-colors">Договор оферты</a>
+          <a href="/privacy.html" target="_blank" class="text-white/30 hover:text-white transition-colors">Политика конфиденциальности</a>
+          <a href="#" class="text-white/30 hover:text-white transition-colors" @click.prevent>Договор оферты</a>
         </div>
         
         <div class="text-[10px] text-white/20 uppercase tracking-widest">
