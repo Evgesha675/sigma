@@ -14,7 +14,8 @@ const initialSlides = [
     subtitle: "ЛЕТНИЙ ИНТЕНСИВ", 
     image: image1, 
     bgColor: "#97D3CB", 
-    tgLink: "https://t.me/your_bot?start=3d_robot" 
+    // Ссылка на 3D и робототехнику
+    tgLink: `${siteConfig.telegram}?start=promo_3d_robot` 
   },
   { 
     id: 2, 
@@ -23,7 +24,8 @@ const initialSlides = [
     subtitle: "ЛЕТНИЙ ИНТЕНСИВ", 
     image: image2, 
     bgColor: "#F1D5AD", 
-    tgLink: "https://t.me/your_bot?start=english_anim" 
+    // Ссылка на английский и анимацию
+    tgLink: `${siteConfig.telegram}?start=promo_english_anim` 
   },
   { 
     id: 3, 
@@ -41,12 +43,12 @@ const initialSlides = [
     subtitle: "Специальный семинар", 
     image: image4, 
     bgColor: "#69B3D6", 
-    tgLink: "https://t.me/your_bot?start=exam",
+    // Ссылка на экзамены
+    tgLink: `${siteConfig.telegram}?start=promo_exams`,
     alignRight: true,
     isBlueText: true 
   }
 ]
-
 const slides = [...initialSlides, ...initialSlides, ...initialSlides]
 const currentSlide = ref(initialSlides.length)
 const swipeOffset = ref(0)
