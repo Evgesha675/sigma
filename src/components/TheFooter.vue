@@ -58,8 +58,9 @@ const navLinks = [
 
       <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
         <div class="flex flex-wrap justify-center md:justify-start gap-6 text-[10px] uppercase tracking-[0.2em]">
-          <a href="/public/privacy.html" target="_blank" class="text-white/30 hover:text-white transition-colors">Политика конфиденциальности</a>
-          <a href="#" class="text-white/30 hover:text-white transition-colors" @click.prevent>Договор оферты</a>
+<a href="/sigma/privacy.html" target="_blank" class="text-white/30 hover:text-white transition-colors">
+  Политика конфиденциальности
+</a>          <a href="#" class="text-white/30 hover:text-white transition-colors" @click.prevent>Договор оферты</a>
         </div>
         
         <div class="text-[10px] text-white/20 uppercase tracking-widest">
