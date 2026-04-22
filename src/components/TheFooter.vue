@@ -63,9 +63,9 @@ const navLinks = [
 </a>          <a href="#" class="text-white/30 hover:text-white transition-colors" @click.prevent>Договор оферты</a>
         </div>
         
-        <div class="text-[10px] text-white/20 uppercase tracking-widest">
-          Разработка: <a href="#" class="hover:text-sigma-pink transition-colors">IT_ART</a>
-        </div>
+        <!-- <div class="text-[10px] text-white/20 uppercase tracking-widest">
+          Разработка: <a href="#" class="hover:text-sigma-pink transition-colors"></a>
+        </div> -->
       </div>
     </div>
   </footer>
