@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { siteConfig } from '../config/data.js'
 
 import image1 from '../assets/hero/slayder_1.png'
 import image2 from '../assets/hero/slayder_2.png'
@@ -15,7 +14,7 @@ const initialSlides = [
     subtitle: "ЛЕТНИЙ ИНТЕНСИВ", 
     image: image1, 
     bgColor: "#97D3CB", 
-    tgLink: `${siteConfig.telegram}?start=promo_3d_robot` 
+    tgLink: "https://t.me/your_bot?start=3d_robot" 
   },
   { 
     id: 2, 
@@ -24,7 +23,7 @@ const initialSlides = [
     subtitle: "ЛЕТНИЙ ИНТЕНСИВ", 
     image: image2, 
     bgColor: "#F1D5AD", 
-    tgLink: `${siteConfig.telegram}?start=promo_english_anim` 
+    tgLink: "https://t.me/your_bot?start=english_anim" 
   },
   { 
     id: 3, 
@@ -42,8 +41,8 @@ const initialSlides = [
     subtitle: "Специальный семинар", 
     image: image4, 
     bgColor: "#69B3D6", 
-    tgLink: `${siteConfig.telegram}?start=promo_exams`,
-    alignRight: true, // Используем для смещения картинки вправо
+    tgLink: "https://t.me/your_bot?start=exam",
+    alignRight: true,
     isBlueText: true 
   }
 ]
@@ -60,7 +59,7 @@ let timer = null
 
 const resetTimer = () => {
   if (timer) clearInterval(timer)
-  timer = setInterval(nextSlide, 8000)
+  timer = setInterval(nextSlide, 3000)
 }
 
 const pauseTimer = () => {
@@ -159,7 +158,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
       class="flex h-full w-full will-change-transform"
       :style="{ 
         transform: `translate3d(calc(${-currentSlide * 100}% + ${swipeOffset}px), 0, 0)`,
-        transition: isDragging || !isTransitioning ? 'none' : 'transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)'
+        transition: isDragging || !isTransitioning ? 'none' : 'transform 1s cubic-bezier(0.25, 1, 0.5, 1)'
       }"
       @transitionend="handleTransitionEnd"
     >
@@ -171,10 +170,18 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
         :aria-hidden="index < initialSlides.length || index >= initialSlides.length * 2 ? 'true' : 'false'"
       >
         <div class="relative z-20 flex-1 md:h-full flex items-start md:items-center pt-10 md:pt-0 pointer-events-none">
-          <div class="mx-auto w-full px-6 md:px-16 flex justify-start max-w-[1400px]">
+          <div 
+            class="w-full px-6 md:px-16 flex transition-all duration-500" 
+            :class="[slide.alignRight ? 'justify-end' : 'justify-start']"
+          >
             <div 
-              class="w-full pointer-events-auto flex flex-col items-start text-left md:max-w-2xl md:ml-10"
-              :class="[ slide.isBlueText ? 'text-[#273972]' : 'text-white' ]"
+              class="w-full pointer-events-auto flex flex-col"
+              :class="[
+                slide.alignRight 
+                  ? 'md:max-w-xl items-center text-center md:items-end md:text-right' 
+                  : 'md:max-w-3xl items-start text-left',
+                slide.isBlueText ? 'text-[#273972]' : 'text-white' 
+              ]"
             >
               <component 
                 :is="index === initialSlides.length ? 'h1' : 'h2'"
@@ -183,7 +190,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
               >
                 {{ slide.title1 }} <br />
                 <span class="text-[7vw] sm:text-3xl md:text-4xl lg:text-5xl opacity-90">
-                   - {{ slide.title2 }}
+                   {{ slide.alignRight ? '' : '- ' }}{{ slide.title2 }}
                 </span>
               </component>
               
@@ -210,23 +217,20 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
             draggable="false"
             :loading="index === initialSlides.length ? 'eager' : 'lazy'"
             class="hidden md:block w-full h-full object-cover"
-            :style="{ objectPosition: slide.alignRight ? 'right center' : 'right bottom' }"
+            :style="{ objectPosition: slide.alignRight ? 'left center' : 'right bottom' }"
           />
           
           <img 
             :src="slide.image" 
             draggable="false"
             :loading="index === initialSlides.length ? 'eager' : 'lazy'"
-            class="md:hidden absolute top-0 w-[220%] max-w-none h-full object-contain right-0 object-right"
+            class="md:hidden absolute top-0 w-[220%] max-w-none h-full object-contain"
+            :class="slide.alignRight ? 'left-0 object-left' : 'right-0 object-right'"
           />
           
           <div 
-            class="absolute inset-0 z-10"
-            :class="[
-              slide.isBlueText 
-                ? 'md:bg-gradient-to-r md:from-white/40 md:to-transparent' 
-                : 'bg-black/10 md:bg-gradient-to-r md:from-black/60 md:via-black/20 md:to-transparent'
-            ]"
+            v-if="!slide.isBlueText"
+            class="absolute inset-0 bg-black/5 md:bg-transparent md:bg-gradient-to-r md:from-black/40 md:via-black/10 md:to-transparent z-10"
           ></div>
         </div>
       </div>
@@ -236,6 +240,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
       <button 
         v-for="(_, index) in initialSlides" :key="index"
         @click="goToSlide(index)"
+        aria-label="Переключить слайд"
         class="h-1.5 md:h-2 transition-all duration-300 rounded-full shadow-md outline-none cursor-pointer"
         :class="(currentSlide % initialSlides.length) === index ? 'bg-white w-10 md:w-16' : 'bg-white/40 w-2 md:w-4 hover:bg-white/70'"
       ></button>
@@ -247,5 +252,12 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 img {
   backface-visibility: hidden;
   transform: translateZ(0);
+}
+/* Плавная коррекция для мобильных, чтобы текст не сливался с краем */
+@media (max-width: 768px) {
+  .px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 </style>
