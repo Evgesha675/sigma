@@ -57,11 +57,11 @@ const getTeacherPhoto = (name) => {
       </h2>
 
       <div class="flex-1 w-full">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-24">
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-24">
           <div 
             v-for="(teacher, index) in teachers" 
             :key="teacher.id"
-            class="teacher-card group relative flex flex-col cursor-pointer transition-all duration-500"
+            class="teacher-card group relative flex flex-col cursor-pointer transition-all duration-500 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
             data-aos="fade-up"
             :data-aos-delay="index * 100"
           >
@@ -70,6 +70,7 @@ const getTeacherPhoto = (name) => {
                 <img 
                   :src="getTeacherPhoto(teacher.photo)" 
                   :alt="teacher.name"
+                  loading="lazy"
                   class="w-full h-full object-cover object-top"
                 />
               </div>

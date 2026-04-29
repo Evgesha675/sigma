@@ -42,12 +42,12 @@ const getImageUrl = (name) => {
       </h2>
 
       <div class="flex-1 w-full">
-        <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div class="w-full flex flex-wrap justify-center gap-6 md:gap-8">
           
           <div 
             v-for="(course, index) in courses" 
             :key="course.id"
-            class="course-card border-l-[10px] p-6 md:p-8 flex flex-col items-start text-left cursor-pointer transition-all duration-500 group relative shadow-xl hover:shadow-2xl w-full"
+            class="course-card border-l-[10px] p-6 md:p-8 flex flex-col items-start text-left cursor-pointer transition-all duration-500 group relative shadow-xl hover:shadow-2xl w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
             :class="{ 'hidden md:flex': index >= 3 && !isExpanded }"
             :style="{ borderLeftColor: course.color, '--item-color': course.color }"
             data-aos="fade-up"
@@ -57,6 +57,7 @@ const getImageUrl = (name) => {
               <img 
                 :src="getImageUrl(course.icon)" 
                 :alt="course.name" 
+                loading="lazy"
                 class="scale-150 max-h-full object-contain h-auto transition-transform duration-700 pointer-events-none origin-left group-hover:scale-[2]"
               />
             </div>

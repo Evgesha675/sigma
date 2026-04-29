@@ -18,7 +18,7 @@ const navLinks = [
         
         <div class="md:col-span-5 space-y-6" data-aos="fade-up">
           <div class="flex items-center">
-            <img src="../assets/logo/logo.svg" alt="СИГМА" class="h-6 md:h-8 w-auto brightness-0 invert" />
+            <img src="../assets/logo/logo.svg" alt="СИГМА" loading="lazy" class="h-6 md:h-8 w-auto brightness-0 invert" />
           </div>
           <p class="text-white/60 text-sm max-w-sm leading-relaxed uppercase tracking-wider">
             Школа программирования для детей и подростков в Иркутской области. 

@@ -77,13 +77,13 @@ const activeIndex = ref(0)
             <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-4 opacity-60">Мы в сети</span>
             <div class="flex gap-6">
               <a :href="siteConfig.vk" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/vk/white" alt="VK" />
+                <img height="32" width="32" src="https://cdn.simpleicons.org/vk/white" alt="VK" loading="lazy" />
               </a>
               <a :href="siteConfig.telegram" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/telegram/white" alt="Telegram" />
+                <img height="32" width="32" src="https://cdn.simpleicons.org/telegram/white" alt="Telegram" loading="lazy" />
               </a>
               <a :href="siteConfig.instagram" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/instagram/white" alt="Instagram" />
+                <img height="32" width="32" src="https://cdn.simpleicons.org/instagram/white" alt="Instagram" loading="lazy" />
               </a>
             </div>
           </div>
