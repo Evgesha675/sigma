@@ -57,6 +57,7 @@ const getImageUrl = (name) => {
               <img 
                 :src="getImageUrl(course.icon)" 
                 :alt="course.name" 
+                loading="lazy"
                 class="scale-150 max-h-full object-contain h-auto transition-transform duration-700 pointer-events-none origin-left group-hover:scale-[2]"
               />
             </div>

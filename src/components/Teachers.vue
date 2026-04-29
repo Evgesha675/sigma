@@ -70,6 +70,7 @@ const getTeacherPhoto = (name) => {
                 <img 
                   :src="getTeacherPhoto(teacher.photo)" 
                   :alt="teacher.name"
+                  loading="lazy"
                   class="w-full h-full object-cover object-top"
                 />
               </div>
