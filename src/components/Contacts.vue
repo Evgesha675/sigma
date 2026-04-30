@@ -35,13 +35,13 @@ const activeIndex = ref(0)
   <section id="contacts" class="bg-sigma-blue py-16 md:py-28 px-4 font-gothic relative overflow-hidden">
     <div class="main-container flex flex-col md:flex-row gap-12 md:gap-20 items-stretch relative z-10">
       
-      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
-        <h2 class="vertical-title text-5xl lg:text-6xl font-bold text-white uppercase tracking-tighter">
+      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-pink pl-4" data-aos="fade-right" aria-hidden="true">
+        <div class="vertical-title text-5xl lg:text-6xl font-bold text-white uppercase tracking-tighter">
           Контакты
-        </h2>
+        </div>
       </div>
 
-      <h2 class="md:hidden text-4xl font-bold text-white uppercase tracking-tighter mb-10 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
+      <h2 class="md:sr-only text-4xl font-bold text-white uppercase tracking-tighter mb-10 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
         Контакты
       </h2>
 
@@ -77,13 +77,13 @@ const activeIndex = ref(0)
             <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-4 opacity-60">Мы в сети</span>
             <div class="flex gap-6">
               <a :href="siteConfig.vk" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/vk/white" alt="VK" />
+                <img height="32" width="32" src="https://cdn.simpleicons.org/vk/white" alt="VK" loading="lazy" />
               </a>
               <a :href="siteConfig.telegram" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/telegram/white" alt="Telegram" />
+                <img height="32" width="32" src="https://cdn.simpleicons.org/telegram/white" alt="Telegram" loading="lazy" />
               </a>
               <a :href="siteConfig.instagram" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/instagram/white" alt="Instagram" />
+                <img height="32" width="32" src="https://cdn.simpleicons.org/instagram/white" alt="Instagram" loading="lazy" />
               </a>
             </div>
           </div>

@@ -60,6 +60,7 @@ const features = [
             <img 
               :src="getDecorUrl('proektnaya_deyatelnost.png')" 
               alt="Проектная деятельность в Сигме" 
+              loading="lazy"
               class="w-full h-auto drop-shadow-[0_10px_40px_rgba(0,0,0,0.15)] visual-main" 
             />
           </div>

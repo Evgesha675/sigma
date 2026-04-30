@@ -45,23 +45,23 @@ const getTeacherPhoto = (name) => {
   <section id="teachers" class="bg-white py-12 md:py-24 font-gothic relative overflow-hidden">
     <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16">
       
-      <div class="hidden md:block w-20 shrink-0 pl-4 relative" data-aos="fade-right">
+      <div class="hidden md:block w-20 shrink-0 pl-4 relative" data-aos="fade-right" aria-hidden="true">
         <div class="absolute left-0 top-0 bottom-0 w-1 bg-sigma-pink"></div>
-        <h2 class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-pink uppercase tracking-tighter opacity-90">
+        <div class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-pink uppercase tracking-tighter opacity-90">
           Команда
-        </h2>
+        </div>
       </div>
 
-      <h2 class="md:hidden text-4xl font-bold text-sigma-pink uppercase tracking-tighter mb-20 pl-4 border-l-4 border-sigma-pink" data-aos="fade-right">
+      <h2 class="md:sr-only text-4xl font-bold text-sigma-pink uppercase tracking-tighter mb-20 pl-4 border-l-4 border-sigma-pink" data-aos="fade-right">
         Преподаватели
       </h2>
 
       <div class="flex-1 w-full">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-24">
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-24">
           <div 
             v-for="(teacher, index) in teachers" 
             :key="teacher.id"
-            class="teacher-card group relative flex flex-col cursor-pointer transition-all duration-500"
+            class="teacher-card group relative flex flex-col cursor-pointer transition-all duration-500 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
             data-aos="fade-up"
             :data-aos-delay="index * 100"
           >
@@ -70,6 +70,7 @@ const getTeacherPhoto = (name) => {
                 <img 
                   :src="getTeacherPhoto(teacher.photo)" 
                   :alt="teacher.name"
+                  loading="lazy"
                   class="w-full h-full object-cover object-top"
                 />
               </div>

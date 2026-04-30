@@ -11,6 +11,7 @@
           <img 
             src="../assets/mascot/mascot_1.svg" 
             alt="Маскот Сигма" 
+            loading="lazy"
             class="w-full max-w-[320px] md:max-w-[500px] h-auto drop-shadow-xl" 
           />
         </div>

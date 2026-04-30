@@ -18,7 +18,7 @@ const navLinks = [
         
         <div class="md:col-span-5 space-y-6" data-aos="fade-up">
           <div class="flex items-center">
-            <img src="../assets/logo/logo.svg" alt="СИГМА" class="h-6 md:h-8 w-auto brightness-0 invert" />
+            <img src="../assets/logo/logo.svg" alt="СИГМА" loading="lazy" class="h-6 md:h-8 w-auto brightness-0 invert" />
           </div>
           <p class="text-white/60 text-sm max-w-sm leading-relaxed uppercase tracking-wider">
             Школа программирования для детей и подростков в Иркутской области. 
@@ -27,7 +27,7 @@ const navLinks = [
         </div>
 
         <div class="md:col-span-3" data-aos="fade-up" data-aos-delay="100">
-          <h4 class="footer-title">Навигация</h4>
+          <h3 class="footer-title">Навигация</h3>
           <nav class="flex flex-col gap-3">
             <a v-for="link in navLinks" :key="link.name" :href="link.href" class="footer-link">
               {{ link.name }}
@@ -36,7 +36,7 @@ const navLinks = [
         </div>
 
         <div class="md:col-span-4" data-aos="fade-up" data-aos-delay="200">
-          <h4 class="footer-title">Связь</h4>
+          <h3 class="footer-title">Связь</h3>
           <div class="space-y-4">
             <a :href="`tel:${siteConfig.phoneLink}`" class="text-xl md:text-2xl font-bold text-white block hover:text-sigma-pink transition-colors">
               {{ siteConfig.phone }}
