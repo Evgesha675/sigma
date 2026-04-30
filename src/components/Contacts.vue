@@ -35,13 +35,13 @@ const activeIndex = ref(0)
   <section id="contacts" class="bg-sigma-blue py-16 md:py-28 px-4 font-gothic relative overflow-hidden">
     <div class="main-container flex flex-col md:flex-row gap-12 md:gap-20 items-stretch relative z-10">
       
-      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
-        <h2 class="vertical-title text-5xl lg:text-6xl font-bold text-white uppercase tracking-tighter">
+      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-pink pl-4" data-aos="fade-right" aria-hidden="true">
+        <div class="vertical-title text-5xl lg:text-6xl font-bold text-white uppercase tracking-tighter">
           Контакты
-        </h2>
+        </div>
       </div>
 
-      <h2 class="md:hidden text-4xl font-bold text-white uppercase tracking-tighter mb-10 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
+      <h2 class="md:sr-only text-4xl font-bold text-white uppercase tracking-tighter mb-10 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
         Контакты
       </h2>
 
