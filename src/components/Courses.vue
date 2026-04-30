@@ -47,9 +47,9 @@ const getImageUrl = (name) => {
           <div 
             v-for="(course, index) in courses" 
             :key="course.id"
-            class="course-card border-l-[10px] p-6 md:p-8 flex flex-col items-start text-left cursor-pointer transition-all duration-500 group relative shadow-xl hover:shadow-2xl w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
+            class="course-card border-t-[10px] p-6 md:p-8 flex flex-col items-start text-left cursor-pointer transition-all duration-500 group relative shadow-xl hover:shadow-2xl w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
             :class="{ 'hidden md:flex': index >= 3 && !isExpanded }"
-            :style="{ borderLeftColor: course.color, '--item-color': course.color }"
+            :style="{ borderTopColor: course.color, '--item-color': course.color }"
             data-aos="fade-up"
             :data-aos-delay="index * 50"
           >
