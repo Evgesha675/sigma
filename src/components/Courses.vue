@@ -31,13 +31,13 @@ const getImageUrl = (name) => {
   <section id="courses" class="bg-white py-12 md:py-24 px-4 font-gothic w-full relative">
     <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16 items-stretch">
       
-      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-blue pl-4" data-aos="fade-right">
-        <h2 class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-blue uppercase tracking-tighter">
+      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-blue pl-4" data-aos="fade-right" aria-hidden="true">
+        <div class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-blue uppercase tracking-tighter">
           Направления
-        </h2>
+        </div>
       </div>
 
-      <h2 class="md:hidden text-4xl font-bold text-sigma-blue uppercase tracking-tighter mb-6 border-l-4 border-sigma-blue pl-4">
+      <h2 class="md:sr-only text-4xl font-bold text-sigma-blue uppercase tracking-tighter mb-6 border-l-4 border-sigma-blue pl-4">
         Направления
       </h2>
 

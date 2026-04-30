@@ -45,14 +45,14 @@ const getTeacherPhoto = (name) => {
   <section id="teachers" class="bg-white py-12 md:py-24 font-gothic relative overflow-hidden">
     <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16">
       
-      <div class="hidden md:block w-20 shrink-0 pl-4 relative" data-aos="fade-right">
+      <div class="hidden md:block w-20 shrink-0 pl-4 relative" data-aos="fade-right" aria-hidden="true">
         <div class="absolute left-0 top-0 bottom-0 w-1 bg-sigma-pink"></div>
-        <h2 class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-pink uppercase tracking-tighter opacity-90">
+        <div class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-pink uppercase tracking-tighter opacity-90">
           Команда
-        </h2>
+        </div>
       </div>
 
-      <h2 class="md:hidden text-4xl font-bold text-sigma-pink uppercase tracking-tighter mb-20 pl-4 border-l-4 border-sigma-pink" data-aos="fade-right">
+      <h2 class="md:sr-only text-4xl font-bold text-sigma-pink uppercase tracking-tighter mb-20 pl-4 border-l-4 border-sigma-pink" data-aos="fade-right">
         Преподаватели
       </h2>
 
