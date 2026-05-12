@@ -45,14 +45,14 @@ const getTeacherPhoto = (name) => {
   <section id="teachers" class="bg-white py-12 md:py-24 font-gothic relative overflow-hidden">
     <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16">
       
-      <div class="hidden md:block w-20 shrink-0 pl-4 relative" data-aos="fade-right" aria-hidden="true">
+      <div class="hidden md:block w-20 shrink-0 pl-4 relative" data-aos="fade-right">
         <div class="absolute left-0 top-0 bottom-0 w-1 bg-sigma-pink"></div>
-        <div class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-pink uppercase tracking-tighter opacity-90">
+        <h2 class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-pink uppercase tracking-tighter opacity-90">
           Команда
-        </div>
+        </h2>
       </div>
 
-      <h2 class="md:sr-only text-4xl font-bold text-sigma-pink uppercase tracking-tighter mb-20 pl-4 border-l-4 border-sigma-pink" data-aos="fade-right">
+      <h2 class="md:hidden text-4xl font-bold text-sigma-pink uppercase tracking-tighter mb-20 pl-4 border-l-4 border-sigma-pink" data-aos="fade-right">
         Преподаватели
       </h2>
 
@@ -61,7 +61,7 @@ const getTeacherPhoto = (name) => {
           <div 
             v-for="(teacher, index) in teachers" 
             :key="teacher.id"
-            class="teacher-card group relative flex flex-col cursor-pointer transition-all duration-500 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
+            class="teacher-card group relative flex flex-col cursor-pointer transition-all duration-500 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)] max-w-sm"
             data-aos="fade-up"
             :data-aos-delay="index * 100"
           >
@@ -70,7 +70,6 @@ const getTeacherPhoto = (name) => {
                 <img 
                   :src="getTeacherPhoto(teacher.photo)" 
                   :alt="teacher.name"
-                  loading="lazy"
                   class="w-full h-full object-cover object-top"
                 />
               </div>

@@ -31,13 +31,13 @@ const getImageUrl = (name) => {
   <section id="courses" class="bg-white py-12 md:py-24 px-4 font-gothic w-full relative">
     <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16 items-stretch">
       
-      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-blue pl-4" data-aos="fade-right" aria-hidden="true">
-        <div class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-blue uppercase tracking-tighter">
+      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-blue pl-4" data-aos="fade-right">
+        <h2 class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-blue uppercase tracking-tighter">
           Направления
-        </div>
+        </h2>
       </div>
 
-      <h2 class="md:sr-only text-4xl font-bold text-sigma-blue uppercase tracking-tighter mb-6 border-l-4 border-sigma-blue pl-4">
+      <h2 class="md:hidden text-4xl font-bold text-sigma-blue uppercase tracking-tighter mb-6 border-l-4 border-sigma-blue pl-4">
         Направления
       </h2>
 
@@ -47,7 +47,7 @@ const getImageUrl = (name) => {
           <div 
             v-for="(course, index) in courses" 
             :key="course.id"
-            class="course-card border-l-[10px] p-6 md:p-8 flex flex-col items-start text-left cursor-pointer transition-all duration-500 group relative shadow-xl hover:shadow-2xl w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
+            class="course-card border-l-[10px] p-6 md:p-8 flex flex-col items-start text-left cursor-pointer transition-all duration-500 group relative shadow-xl hover:shadow-2xl w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] max-w-sm"
             :class="{ 'hidden md:flex': index >= 3 && !isExpanded }"
             :style="{ borderLeftColor: course.color, '--item-color': course.color }"
             data-aos="fade-up"
@@ -57,7 +57,6 @@ const getImageUrl = (name) => {
               <img 
                 :src="getImageUrl(course.icon)" 
                 :alt="course.name" 
-                loading="lazy"
                 class="scale-150 max-h-full object-contain h-auto transition-transform duration-700 pointer-events-none origin-left group-hover:scale-[2]"
               />
             </div>
