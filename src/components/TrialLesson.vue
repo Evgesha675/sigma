@@ -7,19 +7,15 @@ const telegramLink = siteConfig.telegram
 <template>
   <section id="trial-lesson" class="bg-white py-16 md:py-28 px-4 font-gothic w-full relative overflow-hidden">
     
-    <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16 items-stretch">
+    <div class="main-container flex flex-col gap-8 md:gap-12">
       
-      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-pink pl-4" data-aos="fade-right" aria-hidden="true">
-        <div class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-blue uppercase tracking-tighter">
-          Попробуйте
-        </div>
+      <div class="w-full mb-4 md:mb-8" data-aos="fade-right">
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold text-sigma-blue uppercase tracking-tighter border-l-8 border-sigma-pink pl-6 md:pl-8 py-2 bg-sigma-blue/5">
+          Пробный урок
+        </h2>
       </div>
 
-      <h2 class="md:sr-only text-4xl font-bold text-sigma-blue uppercase tracking-tighter mb-6 border-l-4 border-sigma-pink pl-4">
-        Пробный урок
-      </h2>
-
-      <div class="flex-1 flex flex-col justify-center">
+      <div class="flex flex-col justify-center">
         <div class="max-w-4xl" data-aos="fade-up">
           <h3 class="text-4xl md:text-6xl font-black text-sigma-blue uppercase tracking-tighter leading-[0.9] mb-8">
             Первое занятие <br> <span class="text-sigma-pink">бесплатно</span>
@@ -56,12 +52,6 @@ const telegramLink = siteConfig.telegram
 </template>
 
 <style scoped>
-.vertical-title {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  white-space: nowrap;
-}
-
 /* Плавный переход для тени кнопки */
 a {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
