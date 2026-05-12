@@ -11,6 +11,7 @@ const AboutUs = defineAsyncComponent(() => import('./components/AboutUs.vue'))
 const ProjectActivity = defineAsyncComponent(() => import('./components/ProjectActivity.vue'))
 const Courses = defineAsyncComponent(() => import('./components/Courses.vue'))
 const Teachers = defineAsyncComponent(() => import('./components/Teachers.vue'))
+const Reviews = defineAsyncComponent(() => import('./components/Reviews.vue'))
 const Contacts = defineAsyncComponent(() => import('./components/Contacts.vue'))
 const TheFooter = defineAsyncComponent(() => import('./components/TheFooter.vue'))
 
@@ -50,6 +51,7 @@ onUnmounted(() => {
       <ProjectActivity />
       <Courses />
       <Teachers />
+      <Reviews />
       <Contacts />
       <TheFooter />
     </main>
