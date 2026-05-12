@@ -29,15 +29,19 @@ const getImageUrl = (name) => {
 
 <template>
   <section id="courses" class="bg-white py-12 md:py-24 px-4 font-gothic w-full relative">
-    <div class="main-container flex flex-col gap-8 md:gap-12">
+    <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16 items-stretch">
       
-      <div class="w-full mb-4 md:mb-8" data-aos="fade-right">
-        <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold text-sigma-blue uppercase tracking-tighter border-l-8 border-sigma-pink pl-6 md:pl-8 py-2 bg-sigma-blue/5">
+      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-blue pl-4" data-aos="fade-right" aria-hidden="true">
+        <div class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-blue uppercase tracking-tighter">
           Направления
-        </h2>
+        </div>
       </div>
 
-      <div class="w-full">
+      <h2 class="md:sr-only text-4xl font-bold text-sigma-blue uppercase tracking-tighter mb-6 border-l-4 border-sigma-blue pl-4">
+        Направления
+      </h2>
+
+      <div class="flex-1 w-full">
         <div class="w-full flex flex-wrap justify-center gap-6 md:gap-8">
           
           <div 
@@ -83,6 +87,12 @@ const getImageUrl = (name) => {
 </template>
 
 <style scoped>
+.vertical-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+}
+
 .course-card {
   min-height: 220px; 
   background-color: white;
