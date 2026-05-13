@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { siteConfig } from '../config/data.js'
 
 const teachers = [
   { 
@@ -13,7 +13,7 @@ const teachers = [
   { 
     id: 2, 
     name: 'Галина Петровна', 
-    position: 'Арт-директор,Преподаватель', 
+    position: 'Арт-директор, Преподаватель', 
     experience: '8 лет', 
     photo: 'prepod2.png', 
     color: '#E51B51' 
@@ -26,17 +26,18 @@ const teachers = [
     photo: 'Ольга_Николаевна.png', 
     color: '#28A83E' 
   },
-    { 
+  { 
     id: 4, 
-    name: 'Анастасия Владимировна ', 
+    name: 'Анастасия Владимировна', 
     position: 'Преподаватель английского языка', 
     experience: '10 лет', 
     photo: '', 
-    color: '#28A83E' 
+    color: '#273972' 
   }
 ]
 
 const getTeacherPhoto = (name) => {
+  if (!name) return 'https://via.placeholder.com/400x400?text=Sigma' // Заглушка если фото нет
   return new URL(`../assets/teachers/${name}`, import.meta.url).href
 }
 </script>
@@ -45,6 +46,7 @@ const getTeacherPhoto = (name) => {
   <section id="teachers" class="bg-white py-12 md:py-24 font-gothic relative overflow-hidden">
     <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16">
       
+      <!-- Боковой заголовок -->
       <div class="hidden md:block w-20 shrink-0 pl-4 relative" data-aos="fade-right" aria-hidden="true">
         <div class="absolute left-0 top-0 bottom-0 w-1 bg-sigma-pink"></div>
         <div class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-pink uppercase tracking-tighter opacity-90">
@@ -57,46 +59,63 @@ const getTeacherPhoto = (name) => {
       </h2>
 
       <div class="flex-1 w-full">
-        <div class="flex flex-wrap justify-center gap-x-8 gap-y-24">
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-20">
+          
           <div 
             v-for="(teacher, index) in teachers" 
             :key="teacher.id"
-            class="teacher-card group relative flex flex-col cursor-pointer transition-all duration-500 w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
+            class="teacher-card group relative flex flex-col w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)]"
             data-aos="fade-up"
             :data-aos-delay="index * 100"
           >
-            <div class="relative z-20 flex justify-center h-16 md:h-20">
-              <div class="absolute -top-12 md:-top-16 w-40 md:w-44 aspect-square rounded-full border-4 border-white bg-white overflow-hidden shadow-xl transition-transform duration-500 group-hover:scale-110">
-                <img 
-                  :src="getTeacherPhoto(teacher.photo)" 
-                  :alt="teacher.name"
-                  loading="lazy"
-                  class="w-full h-full object-cover object-top"
-                />
-              </div>
-            </div>
-
-            <div 
-              class="flex-1 p-6 md:p-8 pt-16 md:pt-20 flex flex-col text-left transition-all duration-300 shadow-lg group-hover:shadow-2xl"
-              :style="{ backgroundColor: teacher.color }"
-            >
-              <h3 class="text-xl font-bold uppercase text-white leading-tight mb-6 min-h-[3.5rem] flex items-center">
-                {{ teacher.name }}
-              </h3>
+            <!-- Плоская карточка "Окно" -->
+            <!-- Удалены тени и скругления. Добавлена рамка. -->
+            <div class="flex-1 flex flex-col border-2 border-sigma-blue bg-white relative">
               
-              <div class="mb-8 text-white flex-1">
-                <span class="block text-[10px] uppercase tracking-widest opacity-70 mb-2">Должность:</span>
-                <p class="text-sm md:text-base font-medium leading-snug">
-                  {{ teacher.position }}
-                </p>
+              <!-- Верхняя панель окна -->
+              <div 
+                class="h-8 flex items-center justify-end px-4 gap-1.5 border-b-2 border-sigma-blue"
+                :style="{ backgroundColor: teacher.color }"
+              >
+                <div class="w-2 h-2 rounded-full bg-white/40"></div>
+                <div class="w-2 h-2 rounded-full bg-white/60"></div>
+                <div class="w-2 h-2 rounded-full bg-white"></div>
               </div>
 
-              <div class="mt-auto pt-4 border-t border-white/20 text-white">
-                <span class="block text-[10px] uppercase tracking-widest opacity-70 mb-1">Опыт работы:</span>
-                <p class="text-base md:text-lg font-bold italic">{{ teacher.experience }}</p>
+              <!-- Контент карточки -->
+              <div class="p-6 pt-12 md:p-8 md:pt-14 flex flex-col items-center md:items-start text-center md:text-left flex-1">
+                
+                <!-- Фото теперь внутри "окна", круглое, без тени, с рамкой -->
+                <div class="absolute -top-12 left-1/2 -translate-x-1/2 md:left-8 md:translate-x-0 w-24 h-24 border-2 border-sigma-blue rounded-full overflow-hidden bg-gray-100 z-30">
+                  <img 
+                    :src="getTeacherPhoto(teacher.photo)" 
+                    :alt="teacher.name"
+                    class="w-full h-full object-cover object-top"
+                  />
+                </div>
+
+                <h3 class="text-xl font-black uppercase text-sigma-blue leading-tight mb-4 min-h-[3rem] flex items-center">
+                  {{ teacher.name }}
+                </h3>
+                
+                <div class="mb-6 text-sigma-blue/80 w-full">
+                  <span class="block text-[10px] uppercase tracking-widest font-bold opacity-50 mb-1">Должность:</span>
+                  <p class="text-sm font-medium leading-snug">
+                    {{ teacher.position }}
+                  </p>
+                </div>
+
+                <div class="mt-auto pt-4 border-t border-sigma-blue/10 w-full text-sigma-blue">
+                  <span class="block text-[10px] uppercase tracking-widest font-bold opacity-50 mb-1">Опыт работы:</span>
+                  <p class="text-lg font-black italic" :style="{ color: teacher.color }">{{ teacher.experience }}</p>
+                </div>
               </div>
+
+              <!-- Декоративный уголок в стиле Material (опционально) -->
+              <div class="absolute bottom-0 right-0 w-4 h-4 bg-sigma-blue/5"></div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -110,19 +129,19 @@ const getTeacherPhoto = (name) => {
   white-space: nowrap;
 }
 
+/* Эффект наведения: только легкое смещение, без тени */
+.teacher-card {
+  transition: transform 0.3s ease-out;
+}
+
 @media (hover: hover) {
-  .teacher-card {
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  
   .teacher-card:hover {
-    /* Чуть уменьшил подъем, чтобы не перекрывать контент выше */
-    transform: translateY(-10px);
+    transform: translateY(-5px);
   }
 }
 
+/* Убираем фильтры и тени с фото */
 .teacher-card img {
   image-rendering: -webkit-optimize-contrast;
-  filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.15));
 }
 </style>
