@@ -4,6 +4,8 @@ import { onMounted, onUnmounted, defineAsyncComponent } from 'vue'
 import TheHeader from './components/TheHeader.vue'
 import TheHero from './components/TheHero.vue'
 
+// Асинхронная загрузка компонентов, находящихся ниже первого экрана (lazy loading),
+// что позволяет существенно сократить размер начального bundle JS и ускорить загрузку.
 const TrialLesson = defineAsyncComponent(() => import('./components/TrialLesson.vue'))
 const AboutUs = defineAsyncComponent(() => import('./components/AboutUs.vue'))
 const ProjectActivity = defineAsyncComponent(() => import('./components/ProjectActivity.vue'))
