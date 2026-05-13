@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 const courses = [
   { id: 1, name: 'Математика. Устранение пробелов', icon: 'icon_1.svg', color: '#F7A62A' },
@@ -15,91 +15,108 @@ const courses = [
 
 const isExpanded = ref(false)
 
-// Логика отображения: на десктопе всегда всё, на мобилке — зависит от кнопки
-const visibleCourses = computed(() => {
-  // Проверяем ширину экрана (через window, если нужно динамически, 
-  // но проще управлять видимостью через классы Tailwind и показывать/скрывать кнопку)
-  return isExpanded.value ? courses : courses.slice(0, 3)
-})
-
 const getImageUrl = (name) => {
   return new URL(`../assets/icons/${name}`, import.meta.url).href
 }
 </script>
 
 <template>
-  <section id="courses" class="bg-white py-12 md:py-24 px-4 font-gothic w-full relative">
-    <div class="main-container flex flex-col gap-8 md:gap-12">
+  <section id="courses" class="bg-white py-12 md:py-24 font-gothic relative overflow-hidden">
+    <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16">
       
-      <div class="w-full mb-4 md:mb-8" data-aos="fade-right">
-        <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold text-sigma-blue uppercase tracking-tighter border-l-8 border-sigma-pink pl-6 md:pl-8 py-2 bg-sigma-blue/5">
+      <!-- Боковой заголовок в едином стиле с Командой -->
+      <div class="hidden md:block w-20 shrink-0 pl-4 relative" data-aos="fade-right" aria-hidden="true">
+        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sigma-blue"></div>
+        <div class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-blue uppercase tracking-tighter opacity-90">
           Направления
-        </h2>
+        </div>
       </div>
 
-      <div class="w-full">
-        <div class="w-full flex flex-wrap justify-center gap-6 md:gap-8">
+      <h2 class="md:sr-only text-4xl font-bold text-sigma-blue uppercase tracking-tighter mb-16 pl-4 border-l-4 border-sigma-blue" data-aos="fade-right">
+        Направления
+      </h2>
+
+      <div class="flex-1 w-full">
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-16">
           
           <div 
             v-for="(course, index) in courses" 
             :key="course.id"
-            class="course-card border-t-[10px] p-6 md:p-8 flex flex-col items-start text-left cursor-pointer transition-all duration-500 group relative shadow-xl hover:shadow-2xl w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
-            :class="{ 'hidden md:flex': index >= 3 && !isExpanded }"
-            :style="{ borderTopColor: course.color, '--item-color': course.color }"
+            class="course-card group relative flex flex-col w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)]"
+            :class="{ 'hidden md:flex': index >= 6 && !isExpanded }"
             data-aos="fade-up"
             :data-aos-delay="index * 50"
           >
-            <div class="w-full h-32 mb-6 flex items-center justify-start relative overflow-visible">
-              <img 
-                :src="getImageUrl(course.icon)" 
-                :alt="course.name" 
-                loading="lazy"
-                class="scale-150 max-h-full object-contain h-auto transition-transform duration-700 pointer-events-none origin-left group-hover:scale-[2]"
-              />
+            <!-- Карточка-окно -->
+            <div class="flex-1 flex flex-col border-2 border-sigma-blue bg-white relative transition-transform duration-300 group-hover:-translate-y-2">
+              
+              <!-- Верхняя панель окна (как в Преподавателях) -->
+              <div 
+                class="h-8 flex items-center justify-end px-4 gap-1.5 border-b-2 border-sigma-blue"
+                :style="{ backgroundColor: course.color }"
+              >
+                <div class="w-2 h-2 rounded-full bg-white/40"></div>
+                <div class="w-2 h-2 rounded-full bg-white/60"></div>
+                <div class="w-2 h-2 rounded-full bg-white"></div>
+              </div>
+
+              <!-- Контент -->
+              <div class="p-6 flex flex-col items-start flex-1">
+                <div class="w-full h-24 mb-6 flex items-center justify-center">
+                  <img 
+                    :src="getImageUrl(course.icon)" 
+                    :alt="course.name" 
+                    class="max-h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                
+                <h3 class="text-lg md:text-xl font-black uppercase text-sigma-blue leading-tight mb-6 flex-1">
+                  {{ course.name }}
+                </h3>
+                
+                <div class="w-full pt-4 border-t border-sigma-blue/10 flex justify-between items-center">
+                  <span class="text-[10px] uppercase font-bold tracking-widest text-sigma-blue/50">Программа</span>
+                  <span class="text-sm font-black text-sigma-blue group-hover:text-sigma-pink transition-colors">
+                    Подробнее →
+                  </span>
+                </div>
+              </div>
+
+              <!-- Декоративный уголок -->
+              <div class="absolute bottom-0 right-0 w-3 h-3 bg-sigma-blue/5"></div>
             </div>
-            
-            <h3 class="w-full text-xl md:text-2xl font-bold uppercase leading-tight mb-8 break-words text-sigma-blue group-hover:text-white transition-colors duration-300">
-              {{ course.name }}
-            </h3>
-            
-            <span class="text-sm font-bold uppercase tracking-widest mt-auto group-hover:text-white transition-colors duration-300">
-              Подробнее →
-            </span>
           </div>
+
         </div>
 
-        <div class="mt-10 md:hidden flex justify-center">
+        <!-- Кнопка для мобилок -->
+        <div class="mt-12 md:hidden flex justify-center">
           <button 
             @click="isExpanded = !isExpanded"
-            class="border-2 border-sigma-blue text-sigma-blue px-8 py-3 uppercase font-black tracking-widest text-sm hover:bg-sigma-blue hover:text-white transition-all active:scale-95"
+            class="border-2 border-sigma-blue text-sigma-blue px-10 py-3 uppercase font-black tracking-widest text-sm active:scale-95 transition-all"
           >
-            {{ isExpanded ? 'Скрыть' : 'Показать больше' }}
+            {{ isExpanded ? 'Скрыть' : 'Все курсы' }}
           </button>
         </div>
-
       </div>
+
     </div>
   </section>
 </template>
 
 <style scoped>
+.vertical-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+}
+
+/* Убираем лишние тени, работаем только с перемещением */
 .course-card {
-  min-height: 220px; 
-  background-color: white;
+  perspective: 1000px;
 }
 
-.course-card:hover {
-  background-color: var(--item-color) !important;
-  border-left-color: var(--item-color) !important;
-}
-
-.course-card img {
-  filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.08));
-}
-
-@media (hover: hover) {
-  .course-card:hover img {
-    filter: brightness(1.05) drop-shadow(0 15px 12px rgba(0, 0, 0, 0.15));
-  }
+img {
+  image-rendering: -webkit-optimize-contrast;
 }
 </style>

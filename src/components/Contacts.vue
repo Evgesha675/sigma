@@ -32,92 +32,94 @@ const activeIndex = ref(0)
 </script>
 
 <template>
-  <section id="contacts" class="bg-sigma-blue py-16 md:py-28 px-4 font-gothic relative overflow-hidden">
-    <div class="main-container flex flex-col gap-8 md:gap-12 relative z-10">
+  <section id="contacts" class="bg-sigma-blue py-12 md:py-24 px-4 font-gothic relative overflow-hidden">
+    <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16 relative z-10">
       
-      <div class="w-full mb-4 md:mb-8" data-aos="fade-right">
-        <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white uppercase tracking-tighter border-l-8 border-sigma-pink pl-6 md:pl-8 py-2 bg-white/5">
+      <!-- Боковой заголовок -->
+      <div class="hidden md:block w-20 shrink-0 pl-4 relative" data-aos="fade-right">
+        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sigma-pink"></div>
+        <div class="vertical-title text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter opacity-90 leading-none">
           Контакты
-        </h2>
+        </div>
       </div>
 
-      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
-        
-        <div class="space-y-6 md:space-y-10 order-2 lg:order-1" data-aos="fade-up">
-          <div class="space-y-4 md:space-y-6">
-            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block opacity-60">Наши филиалы</span>
-            <div class="flex flex-col gap-2 md:gap-4">
-              <button 
-                v-for="(loc, index) in locations" 
-                :key="index"
-                @click="activeIndex = index"
-                class="text-left p-3 md:p-4 border-l-2 transition-all duration-300 outline-none group"
-                :class="activeIndex === index 
-                  ? 'border-sigma-pink bg-white/10 shadow-lg' 
-                  : 'border-white/10 hover:border-white/40 bg-transparent'"
-              >
-                <span class="block text-[9px] md:text-[10px] uppercase opacity-50 text-white mb-0.5 md:mb-1 group-hover:opacity-100 transition-opacity">{{ loc.city }}</span>
-                <p class="text-base md:text-lg lg:text-xl text-white font-bold leading-tight transition-colors">{{ loc.address }}</p>
-              </button>
+      <div class="flex-1 w-full">
+        <h2 class="md:sr-only text-4xl font-black text-white uppercase tracking-tighter mb-12 pl-4 border-l-4 border-sigma-pink" data-aos="fade-right">
+          Контакты
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+          
+          <!-- Левая колонка -->
+          <div class="space-y-10 order-2 lg:order-1" data-aos="fade-up">
+            <div class="space-y-6">
+              <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block opacity-60">Наши филиалы</span>
+              <div class="flex flex-col gap-3">
+                <button 
+                  v-for="(loc, index) in locations" 
+                  :key="index"
+                  @click="activeIndex = index"
+                  class="text-left p-4 border-l-2 transition-all duration-300 outline-none"
+                  :class="activeIndex === index 
+                    ? 'border-sigma-pink bg-white/10' 
+                    : 'border-white/10 hover:border-white/40 bg-transparent'"
+                >
+                  <span class="block text-[10px] uppercase opacity-50 text-white mb-1">{{ loc.city }} [0{{ index + 1 }}]</span>
+                  <p class="text-lg md:text-xl text-white font-bold leading-tight">{{ loc.address }}</p>
+                </button>
+              </div>
+            </div>
+
+            <!-- Блок с телефоном и соцсетями -->
+            <div class="flex flex-col sm:flex-row gap-8 sm:gap-16 lg:gap-24">
+              <div class="contact-block shrink-0">
+                <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-3 opacity-60">Телефон</span>
+                <!-- whitespace-nowrap чтобы не рвало номер -->
+                <a :href="`tel:${rawPhone}`" class="text-2xl md:text-3xl font-black text-white hover:text-sigma-pink transition-colors whitespace-nowrap">
+                  {{ phoneNumber }}
+                </a>
+              </div>
+
+              <div class="contact-block">
+                <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-4 opacity-60">Соцсети</span>
+                <div class="flex gap-5">
+                  <a :href="siteConfig.vk" target="_blank" class="hover:scale-110 transition-transform">
+                    <img height="28" width="28" src="https://cdn.simpleicons.org/vk/white" alt="VK" />
+                  </a>
+                  <a :href="siteConfig.telegram" target="_blank" class="hover:scale-110 transition-transform">
+                    <img height="28" width="28" src="https://cdn.simpleicons.org/telegram/white" alt="TG" />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="contact-block">
-            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-3 opacity-60">Запись по телефону</span>
-            <a :href="`tel:${rawPhone}`" class="text-2xl md:text-3xl lg:text-4xl font-black text-white hover:text-sigma-pink transition-colors">
-              {{ phoneNumber }}
-            </a>
-          </div>
-
-          <div class="contact-block">
-            <span class="text-white text-[10px] font-black uppercase tracking-[0.3em] block mb-4 opacity-60">Мы в сети</span>
-            <div class="flex gap-6">
-              <a :href="siteConfig.vk" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/vk/white" alt="VK" loading="lazy" />
-              </a>
-              <a :href="siteConfig.telegram" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/telegram/white" alt="Telegram" loading="lazy" />
-              </a>
-              <a :href="siteConfig.instagram" target="_blank" class="opacity-80 hover:opacity-100 hover:scale-110 transition-all">
-                <img height="32" width="32" src="https://cdn.simpleicons.org/instagram/white" alt="Instagram" loading="lazy" />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div 
-          class="map-container overflow-hidden rounded-none relative shadow-2xl order-1 lg:order-2"
-          data-aos="zoom-in"
-        >
-          <transition name="fade" mode="out-in">
+          <!-- Карта -->
+          <div 
+            class="h-[400px] md:h-[500px] lg:h-[600px] w-full relative border-2 border-white/20 order-1 lg:order-2"
+            data-aos="zoom-in"
+          >
             <iframe 
               :key="activeIndex"
               :src="locations[activeIndex].mapLink" 
-              class="absolute inset-0 w-full h-full border-0 grayscale-[0.2] contrast-[1.1]"
+              class="w-full h-full border-0 grayscale-[0.3] contrast-[1.1]"
               allowfullscreen="true"
               loading="lazy"
             ></iframe>
-          </transition>
+          </div>
         </div>
-
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-.map-container {
-  @apply w-full h-[350px] md:h-[450px] lg:h-[650px] bg-white/5 border border-white/10;
+.vertical-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
 }
 
-/* Анимация перехода между картами */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.4s ease-in-out;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+.fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
+.fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>
