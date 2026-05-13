@@ -44,8 +44,9 @@ const getTeacherPhoto = (name) => {
 
 <template>
   <section id="teachers" class="bg-white py-12 md:py-24 font-gothic relative overflow-hidden">
-    <div class="main-container flex flex-col gap-8 md:gap-12">
+    <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16">
       
+      <!-- Боковой заголовок -->
       <div class="hidden md:block w-20 shrink-0 pl-4 relative" data-aos="fade-right" aria-hidden="true">
         <div class="absolute left-0 top-0 bottom-0 w-1 bg-sigma-pink"></div>
         <div class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-pink uppercase tracking-tighter opacity-90">
@@ -58,7 +59,8 @@ const getTeacherPhoto = (name) => {
       </h2>
 
       <div class="flex-1 w-full">
-        <div class="flex flex-wrap justify-center gap-x-8 gap-y-24">
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-20">
+          
           <div 
             v-for="(teacher, index) in teachers" 
             :key="teacher.id"
@@ -125,6 +127,11 @@ const getTeacherPhoto = (name) => {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   white-space: nowrap;
+}
+
+/* Эффект наведения: только легкое смещение, без тени */
+.teacher-card {
+  transition: transform 0.3s ease-out;
 }
 
 @media (hover: hover) {

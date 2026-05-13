@@ -7,27 +7,30 @@ const telegramLink = siteConfig.telegram
 <template>
   <section id="trial-lesson" class="bg-white py-16 md:py-28 px-4 font-gothic w-full relative overflow-hidden">
     
-    <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16 items-stretch">
+    <div class="main-container flex justify-center">
       
-      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-pink pl-4" data-aos="fade-right" aria-hidden="true">
-        <div class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-blue uppercase tracking-tighter">
-          Попробуйте
-        </div>
-      </div>
-
-      <h2 class="md:sr-only text-4xl font-bold text-sigma-blue uppercase tracking-tighter mb-6 border-l-4 border-sigma-pink pl-4">
-        Пробный урок
-      </h2>
-
-      <div class="flex-1 flex flex-col justify-center">
-        <div class="max-w-4xl" data-aos="fade-up">
-          <h3 class="text-4xl md:text-6xl font-black text-sigma-blue uppercase tracking-tighter leading-[0.9] mb-8">
-            Первое занятие <br> <span class="text-sigma-pink">бесплатно</span>
-          </h3>
+        <!-- Карточка в стиле Material Outlined: плоская, без теней, с четкой рамкой -->
+        <!-- border-[1px] или border-2 для акцента, никаких shadow -->
+        <div class="border-2 border-sigma-blue overflow-hidden bg-white max-w-6xl mx-auto w-full" data-aos="fade-up">
           
-          <p class="text-lg md:text-2xl text-sigma-blue/80 font-medium uppercase tracking-wide mb-12 max-w-2xl">
-            Познакомим с миром IT, определим уровень знаний и подберем идеальное направление для вашего ребенка.
-          </p>
+          <!-- Шапка карточки: кнопки справа -->
+          <div class="h-10 bg-sigma-blue flex items-center justify-end px-6 gap-2">
+            <!-- Круглые кнопки без теней -->
+            <div class="w-2.5 h-2.5 rounded-full bg-white/30"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-white/50"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-sigma-pink"></div>
+          </div>
+
+          <!-- Контентная часть -->
+          <div class="p-10 md:p-16 flex flex-col items-center md:items-start text-center md:text-left">
+            
+            <h3 class="text-4xl md:text-5xl lg:text-7xl font-black text-sigma-blue uppercase tracking-tighter leading-[0.9] mb-8">
+              Первое занятие <br> <span class="text-sigma-pink">бесплатно</span>
+            </h3>
+            
+            <p class="text-lg md:text-xl text-sigma-blue/80 font-medium uppercase tracking-wide mb-12 max-w-2xl">
+              Познакомим с миром IT, определим уровень знаний и подберем идеальное направление для вашего ребенка.
+            </p>
 
             <!-- Группа действий -->
             <div class="w-full flex flex-col md:flex-row items-center gap-8 md:gap-12 mt-6">
@@ -63,13 +66,7 @@ const telegramLink = siteConfig.telegram
 </template>
 
 <style scoped>
-.vertical-title {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  white-space: nowrap;
-}
-
-/* Плавный переход для тени кнопки */
+/* Только базовые переходы цвета, без трансформаций и теней */
 a {
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
