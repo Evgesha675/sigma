@@ -32,7 +32,8 @@ const initialSlides = [
     subtitle: "НЕСКОЛЬКИХ КУРСОВ", 
     image: image3, 
     bgColor: "#E9AC44", 
-    hideButton: true 
+    hideButton: true,
+    mobilePos: "object-[85%_center]" // <-- Вот эта настройка двигает картинку левее на мобилках
   },
   { 
     id: 4, 
@@ -149,7 +150,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 
 <template>
   <section 
-    class="relative w-full h-[550px] md:h-[600px] lg:h-[700px] pt-4 md:pt-0 overflow-hidden font-gothic select-none bg-white cursor-grab active:cursor-grabbing"
+    class="relative w-full h-[550px] md:h-[600px] lg:h-[700px] overflow-hidden font-gothic select-none bg-white cursor-grab active:cursor-grabbing"
     @mousedown="onStart" @mousemove="onMove" @mouseup="onEnd"
     @mouseenter="pauseTimer" @mouseleave="resumeTimer"
     @touchstart="onStart" @touchmove="onMove" @touchend="onEnd"
@@ -165,36 +166,68 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
       <div 
         v-for="(slide, index) in slides" 
         :key="index"
-        class="relative min-w-full h-full flex flex-col md:block overflow-hidden"
+        class="relative min-w-full h-full block overflow-hidden"
         :style="{ backgroundColor: slide.bgColor }"
         :aria-hidden="index < initialSlides.length || index >= initialSlides.length * 2 ? 'true' : 'false'"
       >
-        <div class="relative z-20 flex-1 md:h-full flex items-start md:items-center pt-10 md:pt-0 pointer-events-none">
+        
+        <!-- ФОНОВЫЕ ИЗОБРАЖЕНИЯ И ЗАТЕМНЕНИЕ (z-10) -->
+        <div class="absolute inset-0 w-full h-full overflow-hidden z-10 pointer-events-none">
+          <!-- Десктопная картинка -->
+          <img 
+            :src="slide.image" 
+            draggable="false"
+            :loading="index === initialSlides.length ? 'eager' : 'lazy'"
+            class="hidden md:block w-full h-full object-cover"
+            :style="{ objectPosition: slide.alignRight ? 'left center' : 'right bottom' }"
+          />
+          
+          <!-- Мобильная картинка -->
+          <img 
+            :src="slide.image" 
+            draggable="false"
+            :loading="index === initialSlides.length ? 'eager' : 'lazy'"
+            class="md:hidden absolute inset-0 w-full h-full object-cover"
+            :class="slide.mobilePos ? slide.mobilePos : (slide.alignRight ? 'object-left' : 'object-right')"
+          />
+          
+          <!-- Затемнение: на мобилках всегда черное 50%, на десктопе по условию -->
+          <div 
+            class="absolute inset-0 bg-black/50 md:bg-transparent z-10"
+            :class="!slide.isBlueText ? 'md:bg-gradient-to-r md:from-black/40 md:via-black/10 md:to-transparent' : ''"
+          ></div>
+        </div>
+
+        <!-- ТЕКСТОВЫЙ БЛОК (z-20) -->
+        <div class="relative z-20 h-full flex items-center pointer-events-none">
           <div 
             class="w-full px-6 md:px-16 flex transition-all duration-500" 
-            :class="[slide.alignRight ? 'justify-end' : 'justify-start']"
+            :class="[slide.alignRight ? 'justify-center md:justify-end' : 'justify-center md:justify-start']"
           >
             <div 
               class="w-full pointer-events-auto flex flex-col"
               :class="[
                 slide.alignRight 
-                  ? 'md:max-w-xl items-center text-center md:items-end md:text-right' 
-                  : 'md:max-w-3xl items-start text-left',
-                slide.isBlueText ? 'text-[#273972]' : 'text-white' 
+                  ? 'max-w-xl items-center text-center md:items-end md:text-right' 
+                  : 'max-w-3xl items-center text-center md:items-start md:text-left',
+                slide.isBlueText ? 'text-white md:text-[#273972]' : 'text-white' 
               ]"
             >
               <component 
                 :is="index === initialSlides.length ? 'h1' : 'h2'"
                 class="text-[10vw] sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.85] mb-3 uppercase break-words"
-                :class="slide.isBlueText ? '' : 'drop-shadow-xl'"
+                :class="slide.isBlueText ? 'drop-shadow-xl md:drop-shadow-none' : 'drop-shadow-xl'"
               >
                 {{ slide.title1 }} <br />
                 <span class="text-[7vw] sm:text-3xl md:text-4xl lg:text-5xl opacity-90">
-                   {{ slide.alignRight ? '' : '- ' }}{{ slide.title2 }}
+                   <span class="hidden md:inline">{{ slide.alignRight ? '' : '- ' }}</span>{{ slide.title2 }}
                 </span>
               </component>
               
-              <p class="text-[11px] sm:text-sm md:text-xl font-bold uppercase tracking-widest mb-6 md:mb-8 opacity-80">
+              <p 
+                class="text-[11px] sm:text-sm md:text-xl font-bold uppercase tracking-widest mb-6 md:mb-8 opacity-80"
+                :class="slide.isBlueText ? 'drop-shadow-md md:drop-shadow-none' : ''"
+              >
                 {{ slide.subtitle }}
               </p>
 
@@ -210,32 +243,11 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
             </div>
           </div>
         </div>
-
-        <div class="relative w-full h-[55%] md:absolute md:inset-0 md:h-full overflow-hidden z-10 pointer-events-none">
-          <img 
-            :src="slide.image" 
-            draggable="false"
-            :loading="index === initialSlides.length ? 'eager' : 'lazy'"
-            class="hidden md:block w-full h-full object-cover"
-            :style="{ objectPosition: slide.alignRight ? 'left center' : 'right bottom' }"
-          />
-          
-          <img 
-            :src="slide.image" 
-            draggable="false"
-            :loading="index === initialSlides.length ? 'eager' : 'lazy'"
-            class="md:hidden absolute top-0 w-[220%] max-w-none h-full object-contain"
-            :class="slide.alignRight ? 'left-0 object-left' : 'right-0 object-right'"
-          />
-          
-          <div 
-            v-if="!slide.isBlueText"
-            class="absolute inset-0 bg-black/5 md:bg-transparent md:bg-gradient-to-r md:from-black/40 md:via-black/10 md:to-transparent z-10"
-          ></div>
-        </div>
+        
       </div>
     </div>
 
+    <!-- ТОЧКИ ПАГИНАЦИИ -->
     <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex space-x-3 pointer-events-auto">
       <button 
         v-for="(_, index) in initialSlides" :key="index"
@@ -253,7 +265,7 @@ img {
   backface-visibility: hidden;
   transform: translateZ(0);
 }
-/* Плавная коррекция для мобильных, чтобы текст не сливался с краем */
+
 @media (max-width: 768px) {
   .px-6 {
     padding-left: 1.5rem;
