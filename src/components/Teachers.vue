@@ -43,15 +43,20 @@ const getTeacherPhoto = (name) => {
 
 <template>
   <section id="teachers" class="bg-white py-12 md:py-24 font-gothic relative overflow-hidden">
-    <div class="main-container flex flex-col gap-8 md:gap-12">
+    <div class="main-container flex flex-col md:flex-row gap-8 md:gap-16">
       
-      <div class="w-full mb-12 md:mb-16" data-aos="fade-right">
-        <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold text-sigma-pink uppercase tracking-tighter border-l-8 border-sigma-blue pl-6 md:pl-8 py-2 bg-sigma-pink/5">
-          Преподаватели
-        </h2>
+      <div class="hidden md:block w-20 shrink-0 pl-4 relative" data-aos="fade-right" aria-hidden="true">
+        <div class="absolute left-0 top-0 bottom-0 w-1 bg-sigma-pink"></div>
+        <div class="vertical-title text-5xl lg:text-6xl font-bold text-sigma-pink uppercase tracking-tighter opacity-90">
+          Команда
+        </div>
       </div>
 
-      <div class="w-full">
+      <h2 class="md:sr-only text-4xl font-bold text-sigma-pink uppercase tracking-tighter mb-20 pl-4 border-l-4 border-sigma-pink" data-aos="fade-right">
+        Преподаватели
+      </h2>
+
+      <div class="flex-1 w-full">
         <div class="flex flex-wrap justify-center gap-x-8 gap-y-24">
           <div 
             v-for="(teacher, index) in teachers" 
@@ -99,6 +104,12 @@ const getTeacherPhoto = (name) => {
 </template>
 
 <style scoped>
+.vertical-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+}
+
 @media (hover: hover) {
   .teacher-card {
     transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);

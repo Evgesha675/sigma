@@ -33,15 +33,19 @@ const activeIndex = ref(0)
 
 <template>
   <section id="contacts" class="bg-sigma-blue py-16 md:py-28 px-4 font-gothic relative overflow-hidden">
-    <div class="main-container flex flex-col gap-8 md:gap-12 relative z-10">
+    <div class="main-container flex flex-col md:flex-row gap-12 md:gap-20 items-stretch relative z-10">
       
-      <div class="w-full mb-4 md:mb-8" data-aos="fade-right">
-        <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white uppercase tracking-tighter border-l-8 border-sigma-pink pl-6 md:pl-8 py-2 bg-white/5">
+      <div class="hidden md:block w-20 shrink-0 border-l-4 border-sigma-pink pl-4" data-aos="fade-right" aria-hidden="true">
+        <div class="vertical-title text-5xl lg:text-6xl font-bold text-white uppercase tracking-tighter">
           Контакты
-        </h2>
+        </div>
       </div>
 
-      <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
+      <h2 class="md:sr-only text-4xl font-bold text-white uppercase tracking-tighter mb-10 border-l-4 border-sigma-pink pl-4" data-aos="fade-right">
+        Контакты
+      </h2>
+
+      <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-start">
         
         <div class="space-y-6 md:space-y-10 order-2 lg:order-1" data-aos="fade-up">
           <div class="space-y-4 md:space-y-6">
@@ -106,6 +110,12 @@ const activeIndex = ref(0)
 </template>
 
 <style scoped>
+.vertical-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+}
+
 .map-container {
   @apply w-full h-[350px] md:h-[450px] lg:h-[650px] bg-white/5 border border-white/10;
 }
