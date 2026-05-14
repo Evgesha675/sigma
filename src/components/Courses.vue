@@ -62,11 +62,12 @@ const getImageUrl = (name) => {
 
               <!-- Контент -->
               <div class="p-6 flex flex-col items-start flex-1">
-                <div class="w-full h-24 mb-6 flex items-center justify-center">
+                <div class="w-full h-36 mb-6 flex items-center justify-center">
                   <img 
                     :src="getImageUrl(course.icon)" 
                     :alt="course.name" 
                     class="max-h-full object-contain transition-transform duration-500 group-hover:scale-110"
+                    style="transform: scale(1.5);"
                   />
                 </div>
                 
@@ -74,12 +75,12 @@ const getImageUrl = (name) => {
                   {{ course.name }}
                 </h3>
                 
-                <div class="w-full pt-4 border-t border-sigma-blue/10 flex justify-between items-center">
+                <!-- <div class="w-full pt-4 border-t border-sigma-blue/10 flex justify-between items-center">
                   <span class="text-[10px] uppercase font-bold tracking-widest text-sigma-blue/50">Программа</span>
                   <span class="text-sm font-black text-sigma-blue group-hover:text-sigma-pink transition-colors">
                     Подробнее →
                   </span>
-                </div>
+                </div> -->
               </div>
 
               <!-- Декоративный уголок -->

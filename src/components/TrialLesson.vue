@@ -19,17 +19,17 @@ const rebootWindow = () => {
 <template>
   <section id="trial-lesson" class="bg-white py-16 md:py-28 px-4 font-gothic w-full relative overflow-hidden">
     
-    <div class="main-container flex justify-center">
+    <!-- Перенесли data-aos="fade-up" сюда, чтобы он не конфликтовал с scale-0 -->
+    <div class="main-container flex justify-center" data-aos="fade-up">
       
         <!-- 1. ВНЕШНЯЯ ОБЕРТКА ДЛЯ ЗАКРЫТИЯ ОКНА (1 В 1 КАК В ОТЗЫВАХ) -->
         <div 
-          class="w-full max-w-6xl mx-auto transition-all duration-500 ease-in-out" 
+          class="w-full max-w-6xl mx-auto transition-all duration-500 ease-in-out origin-center" 
           :class="isClosed ? 'scale-0 opacity-0' : 'scale-100 opacity-100'"
-          data-aos="fade-up"
         >
           
-          <!-- 2. ВНУТРЕННЯЯ КАРТОЧКА С АНИМАЦИЕЙ УВЕЛИЧЕНИЯ (hover:scale-[1.02]) -->
-          <div class="border-2 border-sigma-blue overflow-hidden bg-white w-full transition-transform duration-300 hover:scale-[1.02]">
+          <!-- 2. ВНУТРЕННЯЯ КАРТОЧКА (Убрали hover:scale-[1.02] и transition-transform) -->
+          <div class="border-2 border-sigma-blue overflow-hidden bg-white w-full">
             
             <!-- Шапка карточки: кнопки справа -->
             <div class="h-10 bg-sigma-blue flex items-center justify-end px-6 gap-2 shrink-0">

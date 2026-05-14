@@ -26,18 +26,10 @@ const teachers = [
     photo: 'Ольга_Николаевна.png', 
     color: '#28A83E' 
   },
-  { 
-    id: 4, 
-    name: 'Анастасия Владимировна', 
-    position: 'Преподаватель английского языка', 
-    experience: '10 лет', 
-    photo: '', 
-    color: '#273972' 
-  }
 ]
 
 const getTeacherPhoto = (name) => {
-  if (!name) return 'https://via.placeholder.com/400x400?text=Sigma' // Заглушка если фото нет
+  if (!name) return 'https://via.placeholder.com/400x400?text=Sigma'
   return new URL(`../assets/teachers/${name}`, import.meta.url).href
 }
 </script>
@@ -69,8 +61,7 @@ const getTeacherPhoto = (name) => {
             :data-aos-delay="index * 100"
           >
             <!-- Плоская карточка "Окно" -->
-            <!-- Удалены тени и скругления. Добавлена рамка. -->
-            <div class="flex-1 flex flex-col border-2 border-sigma-blue bg-white relative">
+            <div class="flex-1 flex flex-col border-2 border-sigma-blue bg-white relative transition-transform duration-300 group-hover:-translate-y-2">
               
               <!-- Верхняя панель окна -->
               <div 
@@ -85,12 +76,12 @@ const getTeacherPhoto = (name) => {
               <!-- Контент карточки -->
               <div class="p-6 pt-12 md:p-8 md:pt-14 flex flex-col items-center md:items-start text-center md:text-left flex-1">
                 
-                <!-- Фото теперь внутри "окна", круглое, без тени, с рамкой -->
+                <!-- Фото внутри "окна", круглое, без тени, с рамкой -->
                 <div class="absolute -top-12 left-1/2 -translate-x-1/2 md:left-8 md:translate-x-0 w-24 h-24 border-2 border-sigma-blue rounded-full overflow-hidden bg-gray-100 z-30">
                   <img 
                     :src="getTeacherPhoto(teacher.photo)" 
                     :alt="teacher.name"
-                    class="w-full h-full object-cover object-top"
+                    class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
 
@@ -111,8 +102,8 @@ const getTeacherPhoto = (name) => {
                 </div>
               </div>
 
-              <!-- Декоративный уголок в стиле Material (опционально) -->
-              <div class="absolute bottom-0 right-0 w-4 h-4 bg-sigma-blue/5"></div>
+              <!-- Декоративный уголок -->
+              <div class="absolute bottom-0 right-0 w-3 h-3 bg-sigma-blue/5"></div>
             </div>
           </div>
 
@@ -129,19 +120,11 @@ const getTeacherPhoto = (name) => {
   white-space: nowrap;
 }
 
-/* Эффект наведения: только легкое смещение, без тени */
 .teacher-card {
-  transition: transform 0.3s ease-out;
+  perspective: 1000px;
 }
 
-@media (hover: hover) {
-  .teacher-card:hover {
-    transform: translateY(-5px);
-  }
-}
-
-/* Убираем фильтры и тени с фото */
-.teacher-card img {
+img {
   image-rendering: -webkit-optimize-contrast;
 }
 </style>
